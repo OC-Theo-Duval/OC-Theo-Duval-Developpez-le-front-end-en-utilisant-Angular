@@ -1,3 +1,24 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="container">
+
+    <div class="row">
+        <div class="header">
+            <img src="../../../assets/images/TeleSport.png" alt="TeleSportPNG">
+        </div>
+    </div>
+    <div class="row">
+        <h2>Olympic games app</h2>
+        <hr />
+    </div>
+    <div class="row" style="display: flex;">
+        <div class="col-sm-4"
+            style="background: #98C3D8; padding: 5px; box-sizing: content-box; width: 100%; border-radius: 10px;">
+            <p>dddd</p>
+        </div>
+        <div class="col-sm-8"
+            style="background: #98C3D8; margin-left: 5px; padding: 5px; box-sizing: content-box; width: 100%; border-radius: 10px;">
+            <div class="chart-container">
+                <canvas id="MyChart">{{ chartdata }}</canvas>
+            </div>
+        </div>
+    </div>
+</div>
