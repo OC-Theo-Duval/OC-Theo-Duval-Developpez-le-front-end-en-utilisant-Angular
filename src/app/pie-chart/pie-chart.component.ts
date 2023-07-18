@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OlympicService } from '../core/services/olympic.service';
 import { Observable, of } from 'rxjs';
 import { Chart } from 'chart.js';
+import { Router } from '@angular/router';
+import { ChartEvent } from 'chart.js/auto';
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,7 +11,10 @@ import { Chart } from 'chart.js';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
-  constructor(private olympicService: OlympicService) { }
+  constructor(
+    private olympicService: OlympicService,
+    private router: Router,
+  ) { }
 
   // @ViewChild('chartCanvas') MyChart: any;
 
@@ -20,8 +25,6 @@ export class PieChartComponent implements OnInit {
   labeldata: any[] = [];
   realdata: any[] = [];
   count: number = 0;
-  // canvas = <HTMLCanvasElement>document.getElementById('MyChart');
-  // ctx = this.canvas!.getContext('2d');
   ngOnInit(): void {
     this.olympicService.getOlympics()
       .subscribe(result => {
@@ -49,7 +52,7 @@ export class PieChartComponent implements OnInit {
 
   RenderChart(labeldata: any, realdata: any) {
 
-    const myChart = new Chart("MyChart", {
+    this.chartdata = new Chart("MyChart", {
 
       //type de graphique
       type: 'pie',
@@ -70,23 +73,19 @@ export class PieChartComponent implements OnInit {
         }],
       },
       options: {
-        // onClick(e, item, arg) {
-        //   console.log();
-        //   // console.log(item.values());
-        //   // console.log(arg.data.datasets);
-        // },
         aspectRatio: 2.5,
+        onClick: (event: ChartEvent, elements: any[], chart: any) => {
+          const nativeEvent = event.native as MouseEvent;
+          if (elements.length > 0) {
+            const clickedElementIndex = elements[0].index;
+            const clickedLabel = labeldata[clickedElementIndex];
+            const clickedValue = realdata[clickedElementIndex];
+
+            this.router.navigate(['/detail-chart'], { queryParams: { label: clickedLabel, value: clickedValue } });
+          }
+        }
       }
     });
   }
-
-  // onChartClick(event: any) {
-  //   let ActivePoints: ChartElement[] = this.MyChart.getElementsAtEvent(event);
-  //   // to do - check ActivePoints for undefined, return if true
-  //   let idx = ActivePoints[0]['_index'];
-  //   let lbl: string = this.MyChart.data.labels[idx];
-  //   let dat = this.MyChart.data.datasets[0].data[idx];
-  //   console.log(lbl,dat);
-  // }
 
 }
