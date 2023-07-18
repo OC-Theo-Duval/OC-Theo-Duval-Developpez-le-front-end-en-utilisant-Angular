@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OlympicService } from '../core/services/olympic.service';
+import { OlympicService } from '../core/_services/olympic.service';
 import { Observable, of } from 'rxjs';
 import { Chart } from 'chart.js';
 import { Router } from '@angular/router';
 import { ChartEvent } from 'chart.js/auto';
+import { SharedDataService } from '../core/_services/shared-data.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -14,6 +15,7 @@ export class PieChartComponent implements OnInit {
   constructor(
     private olympicService: OlympicService,
     private router: Router,
+    private sharedDataService: SharedDataService,
   ) { }
 
   // @ViewChild('chartCanvas') MyChart: any;
@@ -81,7 +83,10 @@ export class PieChartComponent implements OnInit {
             const clickedLabel = labeldata[clickedElementIndex];
             const clickedValue = realdata[clickedElementIndex];
 
-            this.router.navigate(['/detail-chart'], { queryParams: { label: clickedLabel, value: clickedValue } });
+            //On stock les données dans le service
+            this.sharedDataService.setClickedData(clickedLabel, clickedValue);
+
+            this.router.navigate(['/detail-chart']);
           }
         }
       }

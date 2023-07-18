@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SharedDataService } from '../core/_services/shared-data.service';
 
 @Component({
   selector: 'app-detail-chart',
@@ -10,14 +11,15 @@ export class DetailChartComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private sharedDataService: SharedDataService,
     ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const label = params['label'];
-      const value = params['value'];
-      console.log('label', label);
-      console.log('value', value);
+      const clickedLabel = this.sharedDataService.getClickedLabel();
+      const clickedValue = this.sharedDataService.getClickedValue();
+      console.log('label', clickedLabel);
+      console.log('value', clickedValue);
       
     })
   }
