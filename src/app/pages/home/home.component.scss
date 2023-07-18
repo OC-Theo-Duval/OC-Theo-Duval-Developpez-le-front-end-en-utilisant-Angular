@@ -1,3 +1,12 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.container{
+    min-height: 100%;
+}
+
 .container .header {
     background: #98C3D8;
 }

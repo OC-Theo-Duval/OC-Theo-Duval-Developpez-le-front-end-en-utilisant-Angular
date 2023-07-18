@@ -1,24 +1,22 @@
 <div class="container">
-
     <div class="row">
-        <div class="header">
-            <img src="../../../assets/images/TeleSport.png" alt="TeleSportPNG">
+        <div class="header" style="border-radius: 20px;">
+            <img src="../../../assets/images/TeleSport.png" alt="TeleSportPNG" style="border-radius: 20px;">
         </div>
     </div>
     <div class="row">
         <h2>Olympic games app</h2>
         <hr />
     </div>
-    <div class="row" style="display: flex;">
-        <div class="col-sm-4"
+    
+    <div class="row" style="display: flex; align-items: flex-start;">
+        <div class="col-md-4 col-sm-4"
             style="background: #98C3D8; padding: 5px; box-sizing: content-box; width: 100%; border-radius: 10px;">
-            <p>dddd</p>
+            <p>Ce graphique à pour but de vous montrer la sommes des médailles obtenues par pays organisateur lors de chaque Jeux Olympique.</p>
         </div>
-        <div class="col-sm-8"
-            style="background: #98C3D8; margin-left: 5px; padding: 5px; box-sizing: content-box; width: 100%; border-radius: 10px;">
-            <div class="chart-container">
-                <canvas id="MyChart">{{ chartdata }}</canvas>
-            </div>
+        <div class="col-md-8 col-sm-8"
+            style="background: #98C3D8; margin-left: 10px; padding: 5px; box-sizing: content-box; width: 100%; border-radius: 10px;">
+            <app-pie-chart></app-pie-chart>
         </div>
     </div>
 </div>
