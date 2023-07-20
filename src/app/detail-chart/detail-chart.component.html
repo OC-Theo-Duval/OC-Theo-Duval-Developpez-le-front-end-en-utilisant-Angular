@@ -1,1 +1,26 @@
-<p>detail-chart works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col" style="display: flex; justify-content: start; align-items: center;">
+            <a routerLink="/">Home</a>
+        </div>
+        <div class="col" style="display: flex;justify-content: center; align-items: center; font-size: xx-large;">
+            {{ labeldata }}
+        </div>
+    </div>
+    <div class="row" style="display: flex; justify-content: space-around; margin: 10px 0 10px 0;">
+        <div class="col">
+            Numbers of entries {{ numberEntries }}
+        </div>
+        <div class="col">
+            Total number medals {{ medaldata }}
+        </div>
+        <div class="col">
+            Total number athletes {{ totalAthletes }}
+        </div>
+    </div>
+    <div class="row" style="padding: 50px;">
+        <div class="chart-container" style="display: flex; justify-content: center;">
+            <canvas id="MyChart">{{ chartdata }}</canvas>
+        </div>
+    </div>
+</div>

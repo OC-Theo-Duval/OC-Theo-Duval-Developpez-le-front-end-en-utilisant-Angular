@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../core/_services/shared-data.service';
+import { Chart } from 'chart.js';
+import { share, take } from 'rxjs';
 
 @Component({
   selector: 'app-detail-chart',
@@ -8,20 +10,79 @@ import { SharedDataService } from '../core/_services/shared-data.service';
   styleUrls: ['./detail-chart.component.scss']
 })
 export class DetailChartComponent implements OnInit {
+  chartdata: any;
+  labeldata: any[] = [];
+  medaldata: any[] = [];
+  realdata: any[] = [];
+  data: any[] = [];
+  totalAthletes: any[] = [];
+
+  numberEntries: number = 0;
+
+  countMedal: number = 0;
+  countAthletes: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private sharedDataService: SharedDataService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const clickedLabel = this.sharedDataService.getClickedLabel();
+      const clickedMedal = this.sharedDataService.getClickedMedal();
       const clickedValue = this.sharedDataService.getClickedValue();
-      console.log('label', clickedLabel);
-      console.log('value', clickedValue);
-      
+      const clickedData = this.sharedDataService.getClickedData();
+
+      this.labeldata.push(clickedLabel);
+      this.medaldata.push(clickedMedal);
+      this.realdata.push(clickedValue);
+      this.data.push(clickedData);
+
+      if(this.data != null){
+        console.log(this.data);
+        
+        for(let i = 0; i < this.data.length; i++){
+
+          // Calcul du nombre d'entrée au JO pour le pays selectionné
+          this.numberEntries = this.data[i].participations.length;
+
+          this.countAthletes = 0;
+          for(let cAth of this.data[i].participations){
+            //Ajout de la somme des athletes pour chaque JOs
+            this.countAthletes += cAth.athleteCount;            
+          }
+          //Attribution de la somme 
+          this.totalAthletes.push(this.countAthletes);
+
+        }        
+      }
     })
+
+    //Affichage du chart en lui passant les listes de données
+    this.RenderChart(this.labeldata, this.medaldata, this.realdata);
   }
 
+  RenderChart(labeldata: any, medaldata: any, realdata: any) {
+
+    this.chartdata = new Chart("MyChart", {
+
+      //type de graphique
+      type: 'line',
+
+      data: {
+        labels: labeldata,
+        datasets: [{
+          label: 'pays',
+          data: realdata,
+          backgroundColor: [
+            'rgb(75, 192, 192)',
+          ],
+        }],
+      },
+      options: {
+        aspectRatio: 2.5,
+      }
+    });
+  }
 }

@@ -5,20 +5,33 @@ import { Injectable } from '@angular/core';
 })
 export class SharedDataService {
 private clickedLabel: string = "";
-private clickedValue: number = 0;
+private clickedMedal: number = 0;
+private clickedValue: [] = [];
+private clickeData: [] = [];
 
   constructor() { }
 
-  setClickedData(label: string, value: number){
+  setClickedData(label: string, medal: number, value: [], data: []){
     this.clickedLabel = label;
+    this.clickedMedal = medal;
     this.clickedValue = value;
+    this.clickeData = data;
+
   }
 
   getClickedLabel(): string {
     return this.clickedLabel;
   }
 
-  getClickedValue(): number{
+  getClickedMedal(): number{
+    return this.clickedMedal;
+  }
+
+  getClickedValue(): []{
     return this.clickedValue;
+  }
+
+  getClickedData(): []{
+    return this.clickeData;
   }
 }

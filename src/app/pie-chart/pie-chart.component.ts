@@ -24,26 +24,33 @@ export class PieChartComponent implements OnInit {
 
   chartdata: any;
   Medaille: string = "Nombres de médailles";
+  data: any[] = [];
   labeldata: any[] = [];
+  medaldata: any[] = [];
   realdata: any[] = [];
-  count: number = 0;
+
+  countMedals: number = 0;
+
   ngOnInit(): void {
     this.olympicService.getOlympics()
       .subscribe(result => {
         this.chartdata = result;
+        // console.log(this.chartdata);
 
         if (this.chartdata != null) {
           for (let i = 0; i < this.chartdata.length; i++) {
-            this.count = 0;
+            this.realdata.push(this.chartdata[i].participations);
+            this.data.push(this.chartdata[i])
+            this.countMedals = 0;
             //On insère les pays dans le liste
             this.labeldata.push(this.chartdata[i].country);
 
             for (let part of this.chartdata[i].participations) {
               //Création de la somme des médailles par pays organisateur
-              this.count += part.medalsCount;
+              this.countMedals += part.medalsCount;
             }
             //Insertion de la somme des médailles par pays organisateur dans la liste
-            this.realdata.push(this.count);
+            this.medaldata.push(this.countMedals);
           }
           //Affichage du chart en lui passant les listes de données
           this.RenderChart(this.labeldata, this.realdata);
@@ -63,7 +70,7 @@ export class PieChartComponent implements OnInit {
         labels: labeldata,
         datasets: [{
           label: this.Medaille,
-          data: realdata,
+          data: this.medaldata,
           backgroundColor: [
             '#009246',
             '#AD1519',
@@ -76,15 +83,17 @@ export class PieChartComponent implements OnInit {
       },
       options: {
         aspectRatio: 2.5,
-        onClick: (event: ChartEvent, elements: any[], chart: any) => {
+        onClick: (event: ChartEvent, elements: any[]) => {
           const nativeEvent = event.native as MouseEvent;
           if (elements.length > 0) {
             const clickedElementIndex = elements[0].index;
             const clickedLabel = labeldata[clickedElementIndex];
+            const clickedMedal = this.medaldata[clickedElementIndex];
             const clickedValue = realdata[clickedElementIndex];
+            const clickedData = this.data[clickedElementIndex];
 
-            //On stock les données dans le service
-            this.sharedDataService.setClickedData(clickedLabel, clickedValue);
+              //On stock les données dans le service
+              this.sharedDataService.setClickedData(clickedLabel, clickedMedal, clickedValue, clickedData);
 
             this.router.navigate(['/detail-chart']);
           }
