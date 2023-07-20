@@ -17,10 +17,14 @@ export class DetailChartComponent implements OnInit {
   data: any[] = [];
   totalAthletes: any[] = [];
 
+  listmedal: any[] = [];
+  listyear: any[] = [];
+
   numberEntries: number = 0;
 
   countMedal: number = 0;
   countAthletes: number = 0;
+  medalperyear: string = "Médailles par année";
 
   constructor(
     private route: ActivatedRoute,
@@ -39,8 +43,10 @@ export class DetailChartComponent implements OnInit {
       this.realdata.push(clickedValue);
       this.data.push(clickedData);
 
+      console.log(this.realdata);
+      
+
       if(this.data != null){
-        console.log(this.data);
         
         for(let i = 0; i < this.data.length; i++){
 
@@ -50,38 +56,49 @@ export class DetailChartComponent implements OnInit {
           this.countAthletes = 0;
           for(let cAth of this.data[i].participations){
             //Ajout de la somme des athletes pour chaque JOs
-            this.countAthletes += cAth.athleteCount;            
+            this.countAthletes += cAth.athleteCount;     
+            
+            //Ajout des médaille à la list des médailles
+            this.listmedal.push(cAth.medalsCount);    
+            
+            //Ajout des années de participation à la liste des années
+            this.listyear.push(cAth.year)
           }
           //Attribution de la somme 
           this.totalAthletes.push(this.countAthletes);
-
         }        
       }
     })
 
     //Affichage du chart en lui passant les listes de données
-    this.RenderChart(this.labeldata, this.medaldata, this.realdata);
+    this.RenderChart(this.labeldata, this.listmedal, this.listyear);
   }
 
-  RenderChart(labeldata: any, medaldata: any, realdata: any) {
+  RenderChart(labeldata: any, listmedal: any[], listyear: any[]) {
 
     this.chartdata = new Chart("MyChart", {
 
       //type de graphique
       type: 'line',
-
       data: {
         labels: labeldata,
         datasets: [{
-          label: 'pays',
-          data: realdata,
-          backgroundColor: [
-            'rgb(75, 192, 192)',
-          ],
+          label: this.medalperyear,
+          data: listmedal,
+          backgroundColor: 'rgb(75, 192, 192)',
         }],
       },
       options: {
         aspectRatio: 2.5,
+        scales: {
+          x: {
+            type: 'category',
+            labels: listyear
+          },
+          y: {
+            beginAtZero: true,
+          }
+        }
       }
     });
   }
