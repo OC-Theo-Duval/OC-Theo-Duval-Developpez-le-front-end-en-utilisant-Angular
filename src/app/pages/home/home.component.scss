@@ -1,16 +1,8 @@
-html, body{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-.container{
-    height: 100%;
-    width: 100%;
-    min-height: 100%;
-}
-
 .container .header {
     background: #98C3D8;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .header img {
@@ -18,10 +10,14 @@ html, body{
     width: 1000px;
     height: 0%;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 .content{
+    margin-top: 5px;
     padding: 5px;
     display: flex;
     justify-content: center;
+    background: #98C3D8;
+    border-radius: 20px;
 }
