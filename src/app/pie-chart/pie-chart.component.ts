@@ -82,7 +82,10 @@ export class PieChartComponent implements OnInit {
         }],
       },
       options: {
-        aspectRatio: 2.5,
+        
+        responsive: true,
+        maintainAspectRatio: false,
+
         onClick: (event: ChartEvent, elements: any[]) => {
           const nativeEvent = event.native as MouseEvent;
           if (elements.length > 0) {

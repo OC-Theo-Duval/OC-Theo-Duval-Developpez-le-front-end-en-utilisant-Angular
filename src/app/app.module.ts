@@ -8,7 +8,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { DetailChartComponent } from './detail-chart/detail-chart.component';
 import { PieChartRoutingModule } from './pie-chart/pie-chart-routing.module';
-
+import { TooltipModule } from 'ng2-tooltip-directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +22,7 @@ import { PieChartRoutingModule } from './pie-chart/pie-chart-routing.module';
     AppRoutingModule,
     PieChartRoutingModule,
     HttpClientModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent],

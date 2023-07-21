@@ -1,3 +1,20 @@
+// .header{
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+// }
+
+.header-link {
+    display: flex;
+    justify-content: start;
+}
+
+.header-label {
+    display: flex;
+    font-size: xx-large;
+    justify-content: center;
+}
+
 a {
     background: black;
     border: 2px;
@@ -11,4 +28,37 @@ a {
 
 a:hover {
     background: rgb(29, 113, 209);
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0 10px 0;
+}
+
+.info-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    border: 10px black;
+    border-radius: 3px;
+}
+
+section:last-child {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.card {
+    margin-top: 50px;
+    background: #F2F2F2;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
 }

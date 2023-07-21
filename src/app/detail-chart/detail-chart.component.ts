@@ -43,9 +43,6 @@ export class DetailChartComponent implements OnInit {
       this.realdata.push(clickedValue);
       this.data.push(clickedData);
 
-      console.log(this.realdata);
-      
-
       if(this.data != null){
         
         for(let i = 0; i < this.data.length; i++){
