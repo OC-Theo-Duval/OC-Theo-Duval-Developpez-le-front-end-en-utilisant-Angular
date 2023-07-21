@@ -52,7 +52,7 @@ export class DetailChartComponent implements OnInit {
 
           // Calcul du nombre d'entrée au JO pour le pays selectionné
           this.numberEntries = this.data[i].participations.length;
-
+          
           this.countAthletes = 0;
           for(let cAth of this.data[i].participations){
             //Ajout de la somme des athletes pour chaque JOs
@@ -85,7 +85,8 @@ export class DetailChartComponent implements OnInit {
         datasets: [{
           label: this.medalperyear,
           data: listmedal,
-          backgroundColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgb(0, 0, 0)',
+          borderColor: 'rgb(0, 0, 0)'
         }],
       },
       options: {
@@ -93,7 +94,7 @@ export class DetailChartComponent implements OnInit {
         scales: {
           x: {
             type: 'category',
-            labels: listyear
+            labels: listyear,
           },
           y: {
             beginAtZero: true,
