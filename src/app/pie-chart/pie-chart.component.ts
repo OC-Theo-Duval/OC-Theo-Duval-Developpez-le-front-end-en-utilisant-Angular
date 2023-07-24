@@ -35,7 +35,6 @@ export class PieChartComponent implements OnInit {
     this.olympicService.getOlympics()
       .subscribe(result => {
         this.chartdata = result;
-        // console.log(this.chartdata);
 
         if (this.chartdata != null) {
           for (let i = 0; i < this.chartdata.length; i++) {

@@ -13,8 +13,7 @@ const routes: Routes = [
     path: 'detail-chart', component: DetailChartComponent
   },
   {
-    path: '**', // wildcard
-    // redirectTo: '',
+    path: '**',
     component: NotFoundComponent,
   },
 ];

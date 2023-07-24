@@ -1,29 +1,36 @@
-<div class="container">
-    <div class="header">
-        <div class="header-link">
-            <a routerLink="/">Home</a>
-        </div>
+<div class="conteneur">
+    <div class="one">
+        <a routerLink="/">Home</a>
+    </div>
+    <div class="two">
         <div class="header-label">
             {{ labeldata }}
         </div>
     </div>
-    <div class="info">
+    <div class="three">
         <div class="info-content">
             <section>Numbers of entries</section>
             <section>{{ numberEntries }}</section>
         </div>
+    </div>
+    <div class="four">
         <div class="info-content">
             <section> Total number medals</section>
             <section> {{ medaldata }}</section>
         </div>
+    </div>
+    <div class="five">
         <div class="info-content">
-            <section>number athletes</section>
+            <section>Number of athletes</section>
             <section>{{ totalAthletes }}</section>
         </div>
     </div>
-    <div class="card" style="padding: 50px;">
-        <div class="chart-container">
-            <canvas id="MyChart">{{ chartdata }}</canvas>
+    <div class="six">
+        <div class="card">
+            <div class="chart-container">
+                <canvas id="MyChart">{{ chartdata }}</canvas>
+            </div>
         </div>
+        
     </div>
 </div>
