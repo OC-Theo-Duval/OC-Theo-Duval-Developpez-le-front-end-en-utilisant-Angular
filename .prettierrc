@@ -1,0 +1,17 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "htmlWhitespaceSensitivity": "css",
+  "arrowParens": "avoid",
+  "endOfLine": "auto",
+  "bracketSameLine": true,
+  "overrides": [
+    {
+      "files": "*.component.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
+}
