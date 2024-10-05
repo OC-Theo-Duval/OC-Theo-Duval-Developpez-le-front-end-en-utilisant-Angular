@@ -1,3 +1,18 @@
 <h2>Olympic games app</h2>
 <hr />
+
+<!-- Affichage du nombre de données chargées -->
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
+
+<!-- Utilisation de async pour passer les résultats -->
+<ngx-charts-pie-chart
+  [view]="view"
+  [results]="(medals$ | async)"
+  [legend]="showLegend"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  [gradient]="false"
+  [explodeSlices]="false"
+  [arcWidth]="0.25"
+  [scheme]="customColorScheme">
+</ngx-charts-pie-chart>
