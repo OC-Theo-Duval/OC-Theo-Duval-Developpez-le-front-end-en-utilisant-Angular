@@ -27,5 +27,5 @@
   <!-- Utilisation de async pour passer les résultats -->
   <ngx-charts-pie-chart [view]="view" [results]="(medals$ | async)" [labels]="showLabels" [doughnut]="isDoughnut"
     [gradient]="false" [explodeSlices]="false" [arcWidth]="0.25" [scheme]="customColorScheme"
-    [tooltipText]="getTooltipText.bind(this)"></ngx-charts-pie-chart>
+    [tooltipText]="getTooltipText.bind(this)" (select)="onCountryClick($event)"></ngx-charts-pie-chart>
 </div>

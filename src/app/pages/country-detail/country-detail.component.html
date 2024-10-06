@@ -1,0 +1,14 @@
+
+<div><p>country-detail works!</p>
+
+<ngx-charts-line-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="(serie$ | async)"
+  [legend]="showLegend"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [autoScale]="autoScale"
+  [timeline]="timeline">
+</ngx-charts-line-chart>
+</div>

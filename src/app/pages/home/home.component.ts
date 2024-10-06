@@ -6,6 +6,7 @@ import { MedalsByCountry, createMedalsByCountry } from 'src/app/core/models/Meda
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Router } from '@angular/router'; // Importer Router
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[]> = of([]);
   public medals$?: Observable<MedalsByCountry[]>;
 
-  constructor(private olympicService: OlympicService, private sanitizer: DomSanitizer) { }
+  constructor(private olympicService: OlympicService, private sanitizer: DomSanitizer,private router: Router) { }
 
   view: [number, number] = [700, 400]; // Dimensions du graphique
   // Options de personnalisation
@@ -63,7 +64,6 @@ export class HomeComponent implements OnInit {
           }
           result.push(createMedalsByCountry(element.country, totalMedals)); // Ajoute le pays et le total
         });
-        console.log(result)
         return result; // Retourne le tableau de résultats
       })
     );
@@ -80,5 +80,10 @@ export class HomeComponent implements OnInit {
     }
 
     return this.sanitizer.bypassSecurityTrustHtml('<h3>No data available</h3>');
+  }
+
+  onCountryClick(event: any) {
+    const countryName = event.name; // Récupère le nom du pays à partir de l'événement
+    this.router.navigate(['/country', countryName]); // Naviguer vers la page du pays
   }
 }
