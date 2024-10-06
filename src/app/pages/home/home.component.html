@@ -1,18 +1,29 @@
-<h2>Olympic games app</h2>
-<hr />
+<div class="app-container">
+  <h2>Olympic games app</h2>
+  <hr />
+  <div class="title">
+    <h1>Medals per Country</h1>
+  </div>
+  <div class="aligne-sous-title">
+    <div class="sous-title">
+      <div>
+        <h2 style="margin-bottom: 1px;color: #646464;">Number of JOs </h2>
+      </div>
+      <div>
+        <h2 style="margin-top: 1px;">{{ getNumberParticipation() | async}}</h2>
+      </div>
+    </div>
+    <div class="sous-title">
+      <div>
+        <h2 style="margin-bottom: 1px;color: #646464;">Number of Countries</h2>
+      </div>
+      <div>
+        <h2 style="margin-top: 1px;">{{ (olympics$ | async)?.length }}</h2>
+      </div>
+    </div>
+  </div>
 
-<!-- Affichage du nombre de données chargées -->
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
-
-<!-- Utilisation de async pour passer les résultats -->
-<ngx-charts-pie-chart
-  [view]="view"
-  [results]="(medals$ | async)"
-  [legend]="showLegend"
-  [labels]="showLabels"
-  [doughnut]="isDoughnut"
-  [gradient]="false"
-  [explodeSlices]="false"
-  [arcWidth]="0.25"
-  [scheme]="customColorScheme">
-</ngx-charts-pie-chart>
+  <!-- Utilisation de async pour passer les résultats -->
+  <ngx-charts-pie-chart [view]="view" [results]="(medals$ | async)" [labels]="showLabels" [doughnut]="isDoughnut"
+    [gradient]="false" [explodeSlices]="false" [arcWidth]="0.25" [scheme]="customColorScheme"></ngx-charts-pie-chart>
+</div>

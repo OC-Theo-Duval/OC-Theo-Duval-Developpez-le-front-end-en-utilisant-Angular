@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   showLabels: boolean = true;
   isDoughnut: boolean = false; // Définit si le graphique est en forme de "doughnut" ou non
   customColorScheme: Color = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    domain: ['#BC8F8F', '#683A21', '#B983FF', '#94B3FD', '#99FEFF'],
     group: ScaleType.Ordinal,
     name: 'Custom Scheme',
     selectable: true
@@ -31,6 +31,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.medals$ = this.getMedals();
+  }
+
+  getNumberParticipation(): Observable<number>{
+    return this.olympics$.pipe(
+      map((olympics: Olympic[]) => {
+        if (olympics && olympics.length > 0) {
+          // Accède à la première participation
+          return olympics[0].participations.length; // Renvoie le nombre de participations du premier élément
+        }
+        return 0; // Renvoie 0 s'il n'y a pas d'olympics ou de participations
+      })
+    );
   }
 
   getMedals(): Observable<MedalsByCountry[]> {
@@ -49,7 +61,7 @@ export class HomeComponent implements OnInit {
           }
           result.push(createMedalsByCountry(element.country, totalMedals)); // Ajoute le pays et le total
         });
-console.log(result)
+        console.log(result)
         return result; // Retourne le tableau de résultats
       })
     );
