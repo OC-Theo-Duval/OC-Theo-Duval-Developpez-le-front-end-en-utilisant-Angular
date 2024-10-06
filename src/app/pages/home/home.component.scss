@@ -39,3 +39,7 @@
   border-radius: 10px;
   border: 2px solid #14848e;
 }
+
+::ng-deep .ngx-charts text {
+  font-size: 30px;
+}

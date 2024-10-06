@@ -1,5 +1,6 @@
 <div class="app-container">
-  <h2>Olympic games app</h2>
+  <h2>Olympic games app </h2>
+  <i class="fas fa-medal"></i>
   <hr />
   <div class="title">
     <h1>Medals per Country</h1>
@@ -25,5 +26,6 @@
 
   <!-- Utilisation de async pour passer les résultats -->
   <ngx-charts-pie-chart [view]="view" [results]="(medals$ | async)" [labels]="showLabels" [doughnut]="isDoughnut"
-    [gradient]="false" [explodeSlices]="false" [arcWidth]="0.25" [scheme]="customColorScheme"></ngx-charts-pie-chart>
+    [gradient]="false" [explodeSlices]="false" [arcWidth]="0.25" [scheme]="customColorScheme"
+    [tooltipText]="getTooltipText.bind(this)"></ngx-charts-pie-chart>
 </div>

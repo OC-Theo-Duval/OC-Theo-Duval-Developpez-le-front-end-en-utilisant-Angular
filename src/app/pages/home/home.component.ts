@@ -1,24 +1,26 @@
 import { Olympic } from './../../core/models/Olympic';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of, partition } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { MedalsByCountry, createMedalsByCountry } from 'src/app/core/models/MedalsByCountry';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { map } from 'rxjs/operators';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[]> = of([]);
   public medals$?: Observable<MedalsByCountry[]>;
-  constructor(private olympicService: OlympicService) { }
+
+  constructor(private olympicService: OlympicService, private sanitizer: DomSanitizer) { }
 
   view: [number, number] = [700, 400]; // Dimensions du graphique
   // Options de personnalisation
-  showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = false; // Définit si le graphique est en forme de "doughnut" ou non
   customColorScheme: Color = {
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit {
     this.medals$ = this.getMedals();
   }
 
-  getNumberParticipation(): Observable<number>{
+  getNumberParticipation(): Observable<number> {
     return this.olympics$.pipe(
       map((olympics: Olympic[]) => {
         if (olympics && olympics.length > 0) {
@@ -67,4 +69,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  getTooltipText(data: any): SafeHtml {
+    if (data && data.data) {
+      const key = `${data.data.name}-${data.data.value}`;
+
+      const htmlString = `<div>${data.data.name} <br> <i class="fas fa-medal"></i> ${data.data.value}</div>`;
+      const safeHtml = this.sanitizer.bypassSecurityTrustHtml(htmlString);
+
+      return safeHtml;
+    }
+
+    return this.sanitizer.bypassSecurityTrustHtml('<h3>No data available</h3>');
+  }
 }

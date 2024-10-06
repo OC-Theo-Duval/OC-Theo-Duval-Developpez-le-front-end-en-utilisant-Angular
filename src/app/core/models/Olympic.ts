@@ -12,7 +12,7 @@ import { Participation } from './Participation'
 
 export interface Olympic {
   id: number;
-  country: String;
+  country: string;
   participations: Participation[];
 
   /**

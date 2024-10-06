@@ -12,7 +12,7 @@ example of participation:
 export interface Participation {
   id: number;
   year: Date;
-  city: String;
+  city: string;
   medalsCount: number;
   athleteCount: number;
 }
