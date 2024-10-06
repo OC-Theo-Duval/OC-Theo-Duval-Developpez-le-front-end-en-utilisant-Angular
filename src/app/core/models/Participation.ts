@@ -11,7 +11,7 @@ example of participation:
 */
 export interface Participation {
     id: number;
-    yeaar: number;
+    year: number;
     city: string;
     medalsCount: number;
     athleteCount: number;

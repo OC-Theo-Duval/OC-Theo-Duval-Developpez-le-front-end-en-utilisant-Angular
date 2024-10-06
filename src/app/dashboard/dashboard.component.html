@@ -1,10 +1,20 @@
-<div>
+<div class="container">
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div *ngIf="!loading && !errorMessage">
     <h2>Dashboard</h2>
-    <canvas baseChart
-            [datasets]="barChartData.datasets"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [type]="barChartType">
-    </canvas>
+    <h3>Medals per Country</h3>
+    <p>Number of JOs: {{ totalGames }}</p>
+    <p>Number of Country: {{ barChartLabels.length }}</p>
+    <div class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="barChartData.datasets"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [type]="barChartType"
+      (chartClick)="onCountryClick($event)"
+    >
+    </canvas></div>
   </div>
+</div>

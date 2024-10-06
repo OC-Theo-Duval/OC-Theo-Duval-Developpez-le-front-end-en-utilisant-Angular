@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    max-width: 100%; /* Чтобы контейнер не выходил за пределы экрана */
+    overflow: hidden; /* Скрытие переполнения */
+  }
+  
+  .error-message {
+    color: red; /* Цвет сообщения об ошибке */
+    margin-bottom: 1rem;
+    text-align: center; /* Центрирование текста */
+  }
+  
+  .dashboard-content {
+    text-align: center; /* Центрирование текста в контенте */
+  }
+  .chart-container {
+    position: relative; /* Позволяет управлять позиционированием элемента */
+    width: 100%; /* Полная ширина */
+    height: 400px; /* Установите фиксированную высоту для диаграммы */
+    margin: 1rem 0; /* Отступ сверху и снизу */
+  }
