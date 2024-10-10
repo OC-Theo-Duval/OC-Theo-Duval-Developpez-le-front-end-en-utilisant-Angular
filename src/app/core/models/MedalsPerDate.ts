@@ -1,8 +1,8 @@
 export interface MedalsPerDate {
-  name: Date;
+  name: string;
   value: number
 }
 
-export function createMedalsPerDate(name: Date, value: number) {
+export function createMedalsPerDate(name: string, value: number) {
   return { value, name }
 }

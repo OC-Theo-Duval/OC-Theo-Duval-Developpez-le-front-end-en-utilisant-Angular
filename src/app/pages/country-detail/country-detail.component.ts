@@ -21,11 +21,14 @@ export class CountryDetailComponent {
   countryName!: string;
   public olympics$: Observable<Olympic[]> = of([]);
   public serie$: Observable<SerieData[]> = of([]);
+  public TotalMedals$: Observable<number> = of(0);
+  public TotalAthletes$: Observable<number> = of(0);
+  public NumberEntries$: Observable<number> = of(0);
 
   constructor(private route: ActivatedRoute, private olympicService: OlympicService) { }
 
   view: [number, number] = [700, 400]; // Dimensions du graphique
-  showLegend: boolean = true;
+  showLegend: boolean = false;
   showXAxis: boolean = true;
   showYAxis: boolean = true;
   timeline: boolean = true;  // Pour afficher la chronologie
@@ -44,6 +47,9 @@ export class CountryDetailComponent {
     });
     this.olympics$ = this.olympicService.getOlympics();
     this.serie$ = this.getParticipationsByContry(this.countryName)
+    this.TotalMedals$ = this.getTotalMedals(this.countryName)
+    this.TotalAthletes$ = this.getTotalAthletes(this.countryName)
+    this.NumberEntries$ = this.getNumberEntries(this.countryName)
   }
 
   getParticipationsByContry(country: string): Observable<SerieData[]> {
@@ -55,15 +61,67 @@ export class CountryDetailComponent {
             let tab: MedalsPerDate[] = [];
             if (element.participations) {
               element.participations.forEach(participation => {
-                tab.push(createMedalsPerDate(participation.year, participation.medalsCount))
+                tab.push(createMedalsPerDate(participation.year.toString(), participation.medalsCount))
               })
 
               result.push(createSerieData(country, tab));
             }
           }
         })
-        console.log(result)
         return result;
       }))
+  }
+
+  getTotalMedals(country: string): Observable<number> {
+    return this.olympics$.pipe(
+      map((olympics: Olympic[]) => {
+        let somme: number = 0;
+        olympics.forEach(element => {
+          if (element.country == country) {
+            if (element.participations) {
+              element.participations.forEach(participation => {
+                somme += participation.medalsCount
+              })
+            }
+          }
+        })
+        return somme;
+      }
+      ))
+
+  }
+
+  getTotalAthletes(country: string): Observable<number> {
+    return this.olympics$.pipe(
+      map((olympics: Olympic[]) => {
+        let somme: number = 0;
+        olympics.forEach(element => {
+          if (element.country == country) {
+            if (element.participations) {
+              element.participations.forEach(participation => {
+                somme += participation.athleteCount
+              })
+            }
+          }
+        })
+        return somme;
+      }
+      ))
+  }
+
+  getNumberEntries(country: string): Observable<number> {
+    return this.olympics$.pipe(
+      map((olympics: Olympic[]) => {
+        let numberEntries: number = 0
+        olympics.forEach(element => {
+          if (element.country == country) {
+            if (element.participations) {
+              numberEntries = element.participations.length
+            }
+          }
+        })
+        return numberEntries;
+      }
+      ))
   }
 }
