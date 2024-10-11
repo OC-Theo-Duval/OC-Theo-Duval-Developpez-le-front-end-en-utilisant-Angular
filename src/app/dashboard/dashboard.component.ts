@@ -8,37 +8,52 @@ import { Router } from '@angular/router';
 import { TooltipItem } from 'chart.js';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgChartsModule, CommonModule],
+  imports: [ CommonModule, MatCardModule,MatToolbarModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio:false,
     plugins: {
+      
       tooltip: {
         callbacks: {
           label: (tooltipItem: TooltipItem<'pie'>) => {
             const countryIndex = tooltipItem.dataIndex;
-            const totalMedals =
-              this.barChartData.datasets[0].data[countryIndex];
+            const totalMedals = this.barChartData.datasets[0].data[countryIndex];
             const countryLabel = this.barChartLabels[countryIndex];
             return `Country: ${countryLabel}: ${totalMedals} medals`;
           },
         },
+        backgroundColor: '#008080', // Цвет фона для карточки
+        titleFont: {
+          size: 14,
+          family: "'Afacad Flux', sans-serif",
+          weight: 'bold'
+        }
       },
       legend: {
         display: true,
-        position: 'top', // Позиция легенды
+        position: 'top',
         labels: {
-          usePointStyle: true, // Использовать стиль точки
-          pointStyle: 'line', // Можно изменить на 'circle', 'rect', 'triangle' и другие
-          padding: 20, // Отступы
+          usePointStyle: true,
+          
+          pointStyle: 'circle', // Убедитесь, что стиль точки соответствует нужному
+          padding: 15, // Уменьшите отступы для компактного размещения
+          font: {
+            size: 12, // Измените размер текста
+            family: "'Afacad Flux', sans-serif" // Убедитесь, что шрифт используется правильно
+          },
+          color: '#666' // Задайте цвет текста
         }
       }
     }
@@ -101,7 +116,7 @@ export class DashboardComponent implements OnInit {
     console.log('Active points:', activePoints);
     if (activePoints.length > 0) {
       const countryIndex = activePoints[0].index;
-
+      
       // Index valid?
       if (countryIndex >= 0 && countryIndex < this.countryIds.length) {
         const countryId = this.countryIds[countryIndex];

@@ -1,11 +1,27 @@
+
+
 <div class="container">
-  <div *ngIf="errorMessage">{{ errorMessage }}</div>
-  <div *ngIf="!loading && !errorMessage">
-    <h2>Dashboard</h2>
-    <h3>Medals per Country</h3>
-    <p>Number of JOs: {{ totalGames }}</p>
-    <p>Number of Country: {{ barChartLabels.length }}</p>
-    <div class="chart-container">
+  <mat-card class="header-card">
+    <mat-card-title>Medals per Country</mat-card-title>
+  </mat-card>
+
+  <div class="stats-container">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of JOs</p>
+        <h4 class="stat-value">{{ totalGames }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of countries</p>
+        <h4 class="stat-value">{{ barChartLabels.length }}</h4>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="chart-container">
     <canvas
       baseChart
       [datasets]="barChartData.datasets"
@@ -14,7 +30,6 @@
       [legend]="barChartLegend"
       [type]="barChartType"
       (chartClick)="onCountryClick($event)"
-    >
-    </canvas></div>
+    ></canvas>
   </div>
 </div>

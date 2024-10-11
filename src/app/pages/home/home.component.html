@@ -1,6 +1,33 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
-<app-chart></app-chart>
 
+<div class="container">
+    <mat-card class="header-card">
+      <mat-card-title>Medals per Country</mat-card-title>
+    </mat-card>
+  
+    <div class="stats-container">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <p class="stat-title">Number of JOs</p>
+          <h4 class="stat-value">{{ totalGames }}</h4>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <p class="stat-title">Number of countries</p>
+          <h4 class="stat-value">{{ barChartLabels.length }}</h4>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+        <ngx-charts-pie-chart
+          [view]="view"
+          [results]="barChartData"
+          [legend]="false"
+          [labels]="true"
+          (select)="onCountryClick($event)">
+        </ngx-charts-pie-chart>
+
+    
+  </div>
   
