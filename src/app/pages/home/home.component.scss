@@ -3,12 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   width: 100%;
   margin: 0;
 }
 
-.title{
+.title {
   background-color: #14848e;
   padding-inline: 10px;
   height: 50px;
@@ -19,7 +18,7 @@
   border-radius: 10px;
 }
 
-.aligne-sous-title{
+.aligne-sous-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +27,7 @@
 
 }
 
-.sous-title{
+.sous-title {
   height: 70px;
   margin: 10px;
   padding-inline: 10px;
@@ -40,6 +39,25 @@
   border: 2px solid #14848e;
 }
 
-::ng-deep .ngx-charts text { //font size des labels
+::ng-deep .ngx-charts text {
+  //font size des labels
   font-size: 30px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+}
+
+@media (max-width: 655px) {
+  .aligne-sous-title {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ::ng-deep .ngx-charts text {
+    //font size des labels
+    font-size:small;
+  }
+
 }

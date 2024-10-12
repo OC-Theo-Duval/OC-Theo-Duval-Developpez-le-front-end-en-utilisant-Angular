@@ -27,7 +27,6 @@ export class CountryDetailComponent {
 
   constructor(private route: ActivatedRoute, private olympicService: OlympicService) { }
 
-  view: [number, number] = [700, 400]; // Dimensions du graphique
   showLegend: boolean = false;
   showXAxis: boolean = true;
   showYAxis: boolean = true;

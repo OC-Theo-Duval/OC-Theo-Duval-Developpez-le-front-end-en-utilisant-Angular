@@ -3,12 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   width: 100%;
   margin: 0;
 }
 
-.title{
+.title {
   background-color: #14848e;
   padding-inline: 10px;
   height: 50px;
@@ -19,7 +18,7 @@
   border-radius: 10px;
 }
 
-.aligne-sous-title{
+.aligne-sous-title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +27,7 @@
 
 }
 
-.sous-title{
+.sous-title {
   height: 70px;
   margin: 10px;
   padding-inline: 10px;
@@ -41,22 +40,18 @@
 }
 
 .icon {
-  font-size: 40px; /* Ajustez la taille ici */
+  font-size: 40px;
+  /* Ajustez la taille ici */
 }
 
 .chart-container {
-  height: 20px; /* Adjust height for smaller screens */
+  width: 50%;
+  height: 500px;
 }
 
-@media (max-width: 500px) {
-  .chart-container {
-    width: 40px;
-    height: 20px; /* Adjust height for smaller screens */
-  }
-
-  .aligne-sous-title{
+@media (max-width: 802px) {
+  .aligne-sous-title {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
   }
 }
