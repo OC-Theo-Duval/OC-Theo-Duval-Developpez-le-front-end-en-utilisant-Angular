@@ -1,8 +1,50 @@
-<div *ngIf="countryDetails">
-    <h2>{{countryDetails.country }}</h2>
-    <p>ID: {{countryDetails.id}}</p>
-    <p>Number of Participations: {{countryDetails.participations.length}}</p>
+<div class="container">
+  <mat-card class="header-card">
+    <mat-card-title>{{ countryDetails?.country }}</mat-card-title>
+  </mat-card>
 
-    
+  <div class="stats-container">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of entries</p>
+        <h4 class="stat-value">
+          {{ countryDetails?.participations?.length || 0 }}
+        </h4>
+      </mat-card-content>
+    </mat-card>
 
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Total number of medals</p>
+        <h4 class="stat-value">{{ totalMedals }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Total number of athletes</p>
+        <h4 class="stat-value">{{ totalAthletes }}</h4>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="chart-container">
+    <ngx-charts-line-chart
+      [results]="lineChartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="false"
+      [xAxisLabel]="'Dates'"
+      [tooltipDisabled]="true"
+      [autoScale]="true"
+      [animations]="true"
+      [view]="[700, 400]"
+    >
+      >
+    </ngx-charts-line-chart>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="goBack()">Retour</button>
 </div>

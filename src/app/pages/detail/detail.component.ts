@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Olympic } from '../../core/models/Olympic';
 import { OlympicService } from '../../core/services/olympic.service'; 
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule,MatButtonModule, NgxChartsModule],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
   countryId: number = 0;
   countryDetails: Olympic | null= null;
+  totalMedals: number = 0;
+  totalAthletes: number = 0;
+  lineChartData: any[] = [];
+  //view: [number, number] = [700, 400];
 
-  constructor(private route: ActivatedRoute, private olympicService: OlympicService) {}
+  constructor(private route: ActivatedRoute, private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -30,11 +37,44 @@ export class DetailComponent implements OnInit {
       next: (data: Olympic[]) => {
         if (data) {
           this.countryDetails = data.find(item => item.id === this.countryId) || null;
+
+          this.lineChartData = data.map((itemCountry) => ({
+            name: itemCountry.country,
+            series: itemCountry.participations.map((itemParticipation) => ({
+              name: itemParticipation.year.toString(),
+              value: itemParticipation.medalsCount
+            }))
+          }));
+
+       
+          this.processCountryData();
+          
         }
       },
       error: (error) => {
         console.error('Error loading country details:', error);
       }
     });
+  }
+
+  private processCountryData(): void {
+
+
+      // Общее количество медалей и спортсменов
+      if (this.countryDetails && this.countryDetails.participations){
+      this.totalMedals = this.countryDetails.participations.reduce(
+        (sum, p) => sum + p.medalsCount,
+        0
+      );
+
+      this.totalAthletes = this.countryDetails.participations.reduce(
+        (sum, p) => sum + p.athleteCount,
+        0
+      );
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

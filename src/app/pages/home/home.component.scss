@@ -76,13 +76,11 @@
   }
   
   .chart-container {
-    position: relative;
+   
     width: 100%;
     max-width: 600px;
     height: 400px;
     margin-top: 1rem;
   }
-  .ngx-charts .label text {
-    font-size: 3rem !important;  /* Увеличиваем размер шрифта */
-    font-weight: bold !important; /* Делаем текст жирным */
-  }
+  
+  

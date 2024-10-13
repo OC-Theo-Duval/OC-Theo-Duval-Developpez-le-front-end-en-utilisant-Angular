@@ -11,6 +11,8 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 import { RouterModule } from '@angular/router';
 import { __values } from 'tslib';
 
+
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -20,9 +22,11 @@ import { __values } from 'tslib';
     MatCardModule,
     MatToolbarModule,
     RouterModule,
+  
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public olympics$: Observable<any> = of(null);
@@ -62,6 +66,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private processData(data: Olympic[]): void {
+    if (!data || data.length === 0) {
+      console.warn('Data is empty or undefined.');
+      this.barChartLabels = [];
+      this.barChartData = [];
+      this.countryIds = [];
+      return;
+    }
     this.barChartLabels = data.map((item) => item.country);
     this.barChartData = data.map((item) => ({
       name: item.country,
@@ -73,23 +84,24 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.countryIds = data.map((item) => item.id);
     console.log('Country Ids:', this.countryIds);
   }
-
+ 
   onCountryClick(event: any): void {
-    console.log('Clicked event: ', event);
-    const countryIndex = this.barChartData.findIndex(
-      (data) => data.name === event.name
-    );
-
-    // Index valid?
-    if (countryIndex >= 0 && countryIndex < this.countryIds.length) {
-      const countryId = this.countryIds[countryIndex];
-      if (countryId !== undefined) {
-        this.router.navigate(['detail', countryId]);
+    setTimeout(() => {
+      console.log('Clicked event: ', event);
+      const countryIndex = this.barChartData.findIndex(
+        (data) => data.name === event.name
+      );
+  
+      if (countryIndex >= 0 && countryIndex < this.countryIds.length) {
+        const countryId = this.countryIds[countryIndex];
+        if (countryId !== undefined) {
+          this.router.navigate(['detail', countryId]);
+        } else {
+          console.error('Country ID is undefined for index:', countryIndex);
+        }
       } else {
-        console.error('Country ID is undefined for index:', countryIndex);
+        console.error('Invalid country index:', countryIndex);
       }
-    } else {
-      console.error('Invalid country index:', countryIndex);
-    }
+    }, 100);
   }
 }
