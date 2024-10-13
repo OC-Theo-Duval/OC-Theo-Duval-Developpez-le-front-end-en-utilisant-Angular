@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^18.0.3",
     "@angular/router": "^18.0.3",
     "@swimlane/ngx-charts": "^20.5.0",
+    "chart.js": "^4.4.4",
+    "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
