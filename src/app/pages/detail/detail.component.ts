@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Olympic } from '../core/models/Olympic';
-import { OlympicService } from '../core/services/olympic.service'; 
+import { Olympic } from '../../core/models/Olympic';
+import { OlympicService } from '../../core/services/olympic.service'; 
 import { CommonModule } from '@angular/common';
 
 @Component({
