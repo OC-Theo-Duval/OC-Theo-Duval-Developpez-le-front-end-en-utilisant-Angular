@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Router } from '@angular/router';
 
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -13,15 +14,16 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('chart') chart!: Chart;
-
+  
   public olympics$: Observable<Olympic[] | null> = of(null);
   data!: any;
   labels: string[] = [];
   medalData: number[] = [];
-
-  constructor(private olympicService: OlympicService) {}
-
+  
+  constructor(private olympicService: OlympicService, private router: Router) {}
+  
   ngOnInit(): void {
+    // wierd to have two values 
     this.olympics$ = this.olympicService.getOlympics();
     this.olympicService.getOlympics().subscribe({
       next: (olympics) => {
@@ -32,6 +34,17 @@ export class HomeComponent implements OnInit {
       error: (err) => console.warn(err),
       complete: () => {},
     });
+  }
+  
+  // fix any, PointerEvent index not correct
+  handleClick($event: any) {
+    console.log($event)
+    const i: number = $event.element.index;
+    const selected: string = this.data.labels[i];
+    console.log(`clicked: ${this.data.labels[i]}`);
+    if (selected) {
+      this.router.navigate([`/detail/${selected}`]);
+    }
   }
 
   createDatasets(olympics: Olympic[]) {

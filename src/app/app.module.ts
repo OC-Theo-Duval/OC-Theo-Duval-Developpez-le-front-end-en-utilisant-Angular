@@ -9,9 +9,10 @@ import { CardModule } from 'primeng/card';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent],
+  declarations: [AppComponent, HomeComponent, DetailComponent, NotFoundComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule, CardModule],
   exports: [ChartModule, CardModule],
   providers: [],

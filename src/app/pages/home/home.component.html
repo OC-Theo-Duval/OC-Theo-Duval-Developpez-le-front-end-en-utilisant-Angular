@@ -14,5 +14,5 @@
     </div>
 </div>
 <div class="pie-container">
-    <p-chart #chart type="pie" [data]="data" />
+    <p-chart #chart type="pie" [data]="data" (onDataSelect)="handleClick($event)" />
 </div>
