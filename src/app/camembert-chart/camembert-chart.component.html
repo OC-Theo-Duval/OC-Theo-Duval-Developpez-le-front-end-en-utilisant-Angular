@@ -1,0 +1,27 @@
+<div class="header-container">
+  <h1>Medals Per Country</h1>
+</div>
+
+<div class="data-container">
+  <div class="data-item">
+    <h2>Number of JOs</h2>
+    <p class="number">{{ numberOfOlympics }}</p> <!-- Affiche le nombre de JOs -->
+  </div>
+  
+  <div class="data-item">
+    <h2>Number of Countries</h2>
+    <p class="number">{{ numberOfCountries }}</p> <!-- Affiche le nombre de pays -->
+  </div>
+</div>
+
+<div *ngIf="chartData">
+  <canvas baseChart
+          [data]="chartData"
+          [options]="chartOptions"
+          [type]="chartOptions.type">
+  </canvas>
+</div>
+
+<div *ngIf="!chartData">
+  <p>Aucune donnée disponible pour le moment.</p>
+</div>

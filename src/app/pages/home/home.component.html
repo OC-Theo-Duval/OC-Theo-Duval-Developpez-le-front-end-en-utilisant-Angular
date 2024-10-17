@@ -1,3 +1,6 @@
-<h2>Olympic games app</h2>
+<h2>Olympic Games App</h2>
 <hr />
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
+
+<!-- On récupère les données via l'Observable olympics$ et les transmet au composant -->
+<app-camembert-chart [olympics]="(olympics$ | async)"></app-camembert-chart>
