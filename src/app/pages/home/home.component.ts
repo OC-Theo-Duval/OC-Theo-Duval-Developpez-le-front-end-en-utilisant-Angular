@@ -12,6 +12,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
+
 export class HomeComponent implements OnInit {
   @ViewChild('chart') chart!: Chart;
   
@@ -38,10 +39,8 @@ export class HomeComponent implements OnInit {
   
   // fix any, PointerEvent index not correct
   handleClick($event: any) {
-    console.log($event)
     const i: number = $event.element.index;
     const selected: string = this.data.labels[i];
-    console.log(`clicked: ${this.data.labels[i]}`);
     if (selected) {
       this.router.navigate([`/detail/${selected}`]);
     }
@@ -55,7 +54,6 @@ export class HomeComponent implements OnInit {
         medals += participation.medalsCount;
       });
       this.medalData.push(medals);
-      console.log(`${olympic.country} : ${medals}`);
     });
     this.updateChart();
   }
