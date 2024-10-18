@@ -1,0 +1,38 @@
+<nav><a href=""><i class="fa-solid fa-circle-left icon" title="page d'accueil"></i></a>
+
+  <div class="app-container">
+    <div class="title">
+      <h1>{{countryName}}</h1>
+    </div>
+    <div class="aligne-sous-title">
+      <div class="sous-title">
+        <div>
+          <h2 style="margin-bottom: 1px;color: #646464;">Number of entries </h2>
+        </div>
+        <div>
+          <h2 style="margin-top: 1px;">{{ NumberEntries$ | async}}</h2>
+        </div>
+      </div>
+      <div class="sous-title">
+        <div>
+          <h2 style="margin-bottom: 1px;color: #646464;">Total number medals</h2>
+        </div>
+        <div>
+          <h2 style="margin-top: 1px;">{{ TotalMedals$ | async }}</h2>
+        </div>
+      </div>
+      <div class="sous-title">
+        <div>
+          <h2 style="margin-bottom: 1px;color: #646464;">Total number of athletes</h2>
+        </div>
+        <div>
+          <h2 style="margin-top: 1px;">{{ TotalAthletes$ | async}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="chart-container">
+      <ngx-charts-line-chart [scheme]="colorScheme" [results]="(serie$ | async)" [legend]="showLegend"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [autoScale]="autoScale" [timeline]="timeline">
+      </ngx-charts-line-chart>
+    </div>
+  </div>

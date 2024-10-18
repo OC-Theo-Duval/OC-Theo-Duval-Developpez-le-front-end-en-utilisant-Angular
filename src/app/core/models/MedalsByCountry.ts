@@ -1,7 +1,7 @@
 export interface MedalsByCountry{
-name:String;
+name:string;
 value:number;
 }
-export function createMedalsByCountry(name:String,value:number):MedalsByCountry{
+export function createMedalsByCountry(name:string,value:number):MedalsByCountry{
   return {name,value};
 }
