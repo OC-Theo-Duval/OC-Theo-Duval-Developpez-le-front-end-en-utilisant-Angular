@@ -76,11 +76,31 @@
   }
   
   .chart-container {
-   
+    display: flex;
+    justify-content: center; 
+    align-items: center;
     width: 100%;
     max-width: 600px;
     height: 400px;
     margin-top: 1rem;
   }
+  .medal-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+    color: #000;
+  }
+   
+  ::ng-deep .ngx-charts-tooltip-content {
+    background-color: rebeccapurple !important;
+    .img-medal {
+    
+      width: 20px;
+      
+    }
+  }
+     
   
+    
   

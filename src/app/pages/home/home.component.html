@@ -26,8 +26,30 @@
       [labels]="true"
       [tooltipDisabled]="false"
       [animations]="true"
+      [customTooltipTemplate]="tooltipTemplate"
+  
       (select)="onCountryClick($event)"
     >
     </ngx-charts-pie-chart>
+  
+    <ng-template #tooltipTemplate let-model="model">
+      <div ngx-tooltip>
+          <p>
+              {{ model.name }}
+          </p>
+          <p>
+
+            <img  class = "img-medal" [src]="imageUrl" >
+            <span class="fas fa-medal" ></span> 
+             {{ model.value }}
+          </p>
+      
+         
+      </div>
+  </ng-template>
+ 
+
+       
+
   </div>
 </div>
