@@ -14,16 +14,18 @@ export class OlympicService {
 
   loadInitialData() {
     return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value) => this.olympics$.next(value)),
+      tap((value) => {
+        console.log('Data loaded from JSON:', value); // Vérification des données
+        this.olympics$.next(value);
+      }),
       catchError((error, caught) => {
-        // TODO: improve error handling
         console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
         this.olympics$.next(null);
         return caught;
       })
     );
   }
+  
 
   getOlympics() {
     return this.olympics$.asObservable();
