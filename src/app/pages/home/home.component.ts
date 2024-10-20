@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { MedalsByCountry, createMedalsByCountry } from 'src/app/core/models/MedalsByCountry';
+import { TooltipData, CountryClickEvent } from 'src/app/core/models/Tooltip'
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { map } from 'rxjs/operators';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
   }
 
   // Fonction pour générer le texte de l'infobulle affichée lors du survol des segments du graphique
-  getTooltipText(data: any): SafeHtml {
+  getTooltipText(data: TooltipData): SafeHtml {
     if (data && data.data) {
       // Construction du texte HTML pour l'infobulle
       const htmlString = `<div>${data.data.name} <br> <i class="fas fa-medal"></i> ${data.data.value}</div>`;
@@ -92,7 +93,7 @@ export class HomeComponent implements OnInit {
   }
 
   // Fonction appelée lors du clic sur un pays dans le graphique
-  onCountryClick(event: any) {
+  onCountryClick(event: CountryClickEvent) {
     const countryName = event.name; // Récupère le nom du pays depuis l'événement du graphique
     // Redirige vers la page détaillée du pays cliqué
     this.router.navigate(['/country', countryName]);

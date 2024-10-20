@@ -33,9 +33,9 @@ Good luck!
 Cette application web, développée avec Angular, permet de visualiser les données des Jeux Olympiques, y compris la participation, le nombre de médailles, et les statistiques des athlètes pour différents pays. L'application propose également un graphique linéaire dynamique pour afficher l'évolution des médailles au fil du temps grâce à la bibliothèque ngx-charts.
 
 ## Table des matières
-Fonctionnalités
-Technologies utilisées
-Utilisation
+#### Fonctionnalités
+#### Technologies utilisées
+#### Utilisation
 
 ### Fonctionnalités
 Graphiques dynamiques : Visualisation du nombre de médailles remportées par un pays via un graphique de type pie.

@@ -31,6 +31,7 @@ export class CountryDetailComponent {
   public TotalMedals$: Observable<number> = of(0);
   public TotalAthletes$: Observable<number> = of(0);
   public NumberEntries$: Observable<number> = of(0);
+  public isValideCountry!: Boolean
 
   // Constructeur du composant, injectant ActivatedRoute pour accéder aux paramètres de route
   // et OlympicService pour récupérer les données des Jeux Olympiques
@@ -56,16 +57,19 @@ export class CountryDetailComponent {
     // Récupérer la liste des données olympiques via le service OlympicService
     this.olympics$ = this.olympicService.getOlympics();
 
+
     // Récupérer les paramètres de la route active (ici, le nom du pays)
     // Récupération du paramètre de l'URL
     this.route.params.subscribe(params => {
       this.countryName = params['name'];
-      console.log(!this.isCountryValid(this.countryName));
+      //Vérifier si countryName est dans la liste des pays participants
+      this.isCountryValid(this.countryName).subscribe((result: boolean) => {
+        this.isValideCountry = result;  // Here you get the value
+      });
       // Si le nom du pays est invalide ou introuvable, rediriger vers la page Not Found
-      if (!this.countryName || !this.isCountryValid(this.countryName)) {
-        this.router.navigate(['/not-found']);
+      if (!this.isValideCountry) {
+        this.router.navigate(['/countrynotfound']);
       } else {
-        console.log(this.countryName)
         // Initialiser les observables avec des méthodes récupérant les données filtrées pour le pays donné
         this.serie$ = this.getParticipationsByContry(this.countryName); // Données pour le graphique
         this.TotalMedals$ = this.getTotalMedals(this.countryName); // Total des médailles
@@ -82,7 +86,6 @@ export class CountryDetailComponent {
         // Créer un tableau des pays valides
         let validCountries: string[] = olympics.map(element => element.country);
         // Vérifier si le pays est dans la liste
-        console.log('validContries:', validCountries)
         return validCountries.includes(country);
       })
     );
