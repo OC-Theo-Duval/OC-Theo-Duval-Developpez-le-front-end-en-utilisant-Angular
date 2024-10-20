@@ -1,24 +1,38 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgChartsModule } from 'ng2-charts';
-import { ChartType, ChartConfiguration } from 'chart.js';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @Component({
-  selector: 'app-chart',
+  imports: [CommonModule, NgxChartsModule],
   standalone: true,
-  imports: [CommonModule, NgChartsModule],
+  selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent {
-  public barChartOptions: ChartConfiguration['options'] = { responsive: true};
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-
-public barChartData = [
-  {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-  {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-];
-
-public barChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+ 
+  public pieChartData = [
+    {
+      "name": "Series A",
+      "value": 65
+    },
+    {
+      "name": "Series B",
+      "value": 28
+    },
+    {
+      "name": "Series C",
+      "value": 80
+    },
+    {
+      "name": "Series D",
+      "value": 19
+    }
+  ];
+  
+  public colorScheme = 'vivid'; 
+  public view: [number, number] = [700, 400];
+  public showLegend = true;
+  public animations = true;
 }

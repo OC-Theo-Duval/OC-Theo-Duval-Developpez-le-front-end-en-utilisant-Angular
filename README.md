@@ -1,29 +1,69 @@
-# OlympicGamesStarter
+Olympic Games Dashboard
+## Description
+This is a web application developed for the TéléSport TV channel. It provides users with an interactive dashboard to view information about previous Olympic Games, including the number of medals by country and other statistical data. The application is optimized to work on both computers and mobile devices.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+## Technologies
+Angular (version ^18.2.8)
+RxJS (version ~7.8.0)
+Angular Material (version ^18.2.8)
+SCSS for styling
+TypeScript (version ~5.4.2)
+Requirements
+Node.js version 14.x or higher
+npm version 6.x or higher
+Angular CLI version ^18.2.8
 
-Don't forget to install your node_modules before starting (`npm install`).
+Important Note
+Please Note: The Angular versions specified in package.json may be incorrect or pre-release versions. As of October 2023, the latest stable version of Angular is 16.x. If you encounter installation or compatibility issues, please check and update the dependency versions to the current ones.
 
-## Development server
+## Installation
+Fork the repository:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Navigate to the original repository at https://github.com/natalliaSkiba/Developpez-le-front-end-en-utilisant-Angular.
+Click the "Fork" button in the top-right corner to create a copy of the repository in your own GitHub account.
+Clone your forked repository:
 
-## Build
+git clone https://github.com/your_username/Developpez-le-front-end-en-utilisant-Angular.git
+Navigate to the project directory:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+cd Developpez-le-front-end-en-utilisant-Angular
+Install Angular CLI globally (if not already installed):
 
-## Where to start
+npm install -g @angular/cli
+Install project dependencies:
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+npm install
+If you encounter errors during dependency installation, check the versions of Angular and other packages in package.json and update them to compatible versions.
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+Running the Application
+Development Mode
+Start the development server:
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+ng serve
+The application will be available at http://localhost:4200/.
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+## Production Build
+To build an optimized production version of the application, run:
 
-You're now ready to implement the requested features.
+ng build --configuration production
+The built files will be located in the directory specified in the angular.json file under the "outputPath" parameter. By default, this is dist/olympic-games-starter.
 
-Good luck!
+## Project Structure
+Services: Used to perform HTTP requests to the API.
+RxJS and Observables: Used for managing asynchronous operations and data streams.
+Unsubscribing from Observables: All subscriptions are properly unsubscribed in ngOnDestroy to prevent memory leaks.
+Code Typing: All code is strictly typed using TypeScript; the any type is not used.
+Best Practices
+Code Organization: The project is organized according to Angular recommendations to enhance readability and maintainability.
+Styling: SCSS is used for efficient and organized component styling.
+Responsive Design: The application is optimized to work on various devices, including mobile phones and computers.
+Design and Mockups
+The application's design is based on mockups provided by UX designer Omar. All user interfaces adhere to these specifications.
+
+Notes
+Tool Versions: Ensure that the versions of Node.js, npm, and Angular CLI match the project's requirements.
+Dependency Issues: If you encounter problems during installation or running the application, check the package.json and angular.json files for incompatible versions.
+
+## Contact
+If you have any questions or suggestions, please contact us:
+skiba.natallia77@gmail.com

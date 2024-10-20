@@ -2,6 +2,14 @@
   <mat-card class="header-card">
     <mat-card-title>Medals per Country</mat-card-title>
   </mat-card>
+  
+  <div *ngIf="errorMessage" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
   <div class="stats-container">
     <mat-card class="stat-card">
@@ -26,30 +34,20 @@
       [labels]="true"
       [tooltipDisabled]="false"
       [animations]="true"
-      [customTooltipTemplate]="tooltipTemplate"
-  
+    
       (select)="onCountryClick($event)"
     >
+      <ng-template #tooltipTemplate let-model="model">
+        <div ngx-tooltip>
+          <p>
+            {{ model.name }}
+          </p>
+          <p>
+            <img class="img-medal" src="assets/fonts/icons/icons8.png" />
+            {{ model?.value }}
+          </p>
+        </div>
+      </ng-template>
     </ngx-charts-pie-chart>
-  
-    <ng-template #tooltipTemplate let-model="model">
-      <div ngx-tooltip>
-          <p>
-              {{ model.name }}
-          </p>
-          <p>
-
-            <img  class = "img-medal" [src]="imageUrl" >
-            <span class="fas fa-medal" ></span> 
-             {{ model.value }}
-          </p>
-      
-         
-      </div>
-  </ng-template>
- 
-
-       
-
   </div>
 </div>

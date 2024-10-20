@@ -11,8 +11,6 @@ import { Participation } from 'src/app/core/models/Participation';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { RouterModule } from '@angular/router';
 import { __values } from 'tslib';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import { HostListener } from '@angular/core';
 
 @Component({
@@ -24,17 +22,15 @@ import { HostListener } from '@angular/core';
     MatCardModule,
     MatToolbarModule,
     RouterModule,
-    FontAwesomeModule
-  
-  ],
+    ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public olympics$: Observable<any> = of(null);
+  public olympics$: Observable<Olympic[]>=of ([] as Olympic[]);
   public barChartLabels: string[] = [];
-  public barChartData: any[] = [];
+  public barChartData:  { name: string; value: number; }[] = [];
   public countryIds: number[] = [];
   public totalGames: number = 0;
   public loading: boolean = true;
@@ -42,10 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public view: [number, number] = [700, 400]; 
   public showLegend: boolean = true;
-  public faMedal = faMedal;
-  imageUrl: string = "/assets/fonts/icons/medal.png";
   
-
   @HostListener('window:resize', ['$event'])
   onResize(event: UIEvent): void {
   const target = event?.target as Window;
@@ -101,7 +94,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log('Country Ids:', this.countryIds);
   }
  
-  onCountryClick(event: any): void {
+  onCountryClick(event:{name: string} ): void {
     setTimeout(() => {
       console.log('Clicked event: ', event);
       const countryIndex = this.barChartData.findIndex(
@@ -114,9 +107,11 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.router.navigate(['detail', countryId]);
         } else {
           console.error('Country ID is undefined for index:', countryIndex);
+          this.errorMessage = 'Country ID is undefined ';
         }
       } else {
         console.error('Invalid country index:', countryIndex);
+        this.errorMessage = 'Invalid country index ';
       }
     }, 100);
   }

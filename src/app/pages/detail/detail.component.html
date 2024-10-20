@@ -3,6 +3,14 @@
     <mat-card-title>{{ countryDetails?.country }}</mat-card-title>
   </mat-card>
 
+  <div *ngIf="errorMessage" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
   <div class="stats-container">
     <mat-card class="stat-card">
       <mat-card-content>
@@ -37,14 +45,25 @@
       [showXAxisLabel]="true"
       [showYAxisLabel]="false"
       [xAxisLabel]="'Dates'"
-      [tooltipDisabled]="true"
+      [tooltipDisabled]="false"
       [autoScale]="true"
       [animations]="true"
       [view]="view"
     >
-      >
+      <ng-template #seriesTooltipTemplate let-model="model">
+        <div ngx-tooltip>
+          <p>
+            {{ model[0]?.name }}
+          </p>
+     
+          <p>
+            <img class="img-medal" src="assets/fonts/icons/icons8.png" />
+            {{ model[0]?.value  }}
+          </p>
+         
+        </div>
+      </ng-template>
     </ngx-charts-line-chart>
-    
   </div>
 
   <button mat-raised-button color="primary" (click)="goBack()">Retour</button>

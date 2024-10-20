@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HostListener } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-detail',
@@ -14,14 +15,16 @@ import { HostListener } from '@angular/core';
   imports: [CommonModule, MatCardModule, MatButtonModule, NgxChartsModule],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] ,
 })
 export class DetailComponent implements OnInit {
-  countryId: number = 0;
-  countryDetails: Olympic | null = null;
-  totalMedals: number = 0;
-  totalAthletes: number = 0;
-  lineChartData: any[] = [];
-  view: [number, number] = [700, 400];
+  public countryId: number = 0;
+  public countryDetails: Olympic | null = null;
+  public totalMedals: number = 0;
+  public totalAthletes: number = 0;
+  public lineChartData: { name: string; series: {name:string; value: number}[]; } [] = [];
+  public view: [number, number] = [700, 400];
+  public errorMessage: string = '';
 
   @HostListener('window:resize', ['$event'])
   onResize(event: UIEvent): void {
@@ -73,13 +76,14 @@ export class DetailComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading country details:', error);
+        this.errorMessage = 'Error loading country details';
       },
     });
   }
 
   private processCountryData(): void {
-    // Общее количество медалей и спортсменов
-    if (this.countryDetails && this.countryDetails.participations) {
+   
+     if (this.countryDetails && this.countryDetails.participations) {
       this.totalMedals = this.countryDetails.participations.reduce(
         (sum, p) => sum + p.medalsCount,
         0
