@@ -3,7 +3,7 @@ import { SerieData, createSerieData } from './../../core/models/SerieData';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts'; // Module de graphiques ngx-charts
-import { ActivatedRoute, Router } from '@angular/router'; // Permet d'accéder aux paramètres de la route active
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'; // Permet d'accéder aux paramètres de la route active
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from './../../core/models/Olympic';
 import { Observable, of } from 'rxjs';
@@ -16,7 +16,7 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   standalone: true, // Le composant est autonome (standalone)
   templateUrl: './country-detail.component.html', // Fichier HTML du template associé
   styleUrl: './country-detail.component.scss', // Fichier de styles SCSS associé
-  imports: [CommonModule, NgxChartsModule] // Importation des modules nécessaires
+  imports: [CommonModule, NgxChartsModule,RouterLink] // Importation des modules nécessaires
 })
 export class CountryDetailComponent {
   countryName!: string; // Nom du pays (sera initialisé dans ngOnInit)
