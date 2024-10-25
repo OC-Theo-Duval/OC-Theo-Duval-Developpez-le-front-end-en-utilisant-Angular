@@ -6,7 +6,7 @@ import { Olympic } from 'src/app/core/models/Olympic';
 
 @Injectable({
   providedIn: 'root',
-})
+}) //permet d'injecter ce service à la racine de l'application
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Olympic[]>([]);
