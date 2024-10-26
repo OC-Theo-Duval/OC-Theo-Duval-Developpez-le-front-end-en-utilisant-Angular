@@ -1,5 +1,5 @@
-<div class="container">
-  <mat-card class="header-card">
+<div  class="container">
+  <mat-card *ngIf="errorMessage == ''" class="header-card">
     <mat-card-title>{{ countryDetails?.country }}</mat-card-title>
   </mat-card>
 
@@ -11,7 +11,7 @@
     </mat-card>
   </div>
 
-  <div class="stats-container">
+  <div *ngIf="errorMessage == ''" class="stats-container">
     <mat-card class="stat-card">
       <mat-card-content>
         <p class="stat-title">Number of entries</p>
@@ -36,7 +36,7 @@
     </mat-card>
   </div>
 
-  <div class="chart-container">
+  <div *ngIf="errorMessage == ''" class="chart-container">
     <ngx-charts-line-chart
       [results]="lineChartData"
       [xAxis]="true"

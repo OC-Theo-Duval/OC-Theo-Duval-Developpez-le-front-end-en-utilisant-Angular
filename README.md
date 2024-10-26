@@ -35,14 +35,14 @@ Install project dependencies:
 npm install
 If you encounter errors during dependency installation, check the versions of Angular and other packages in package.json and update them to compatible versions.
 
-Running the Application
+## Running the Application
 Development Mode
 Start the development server:
 
 ng serve
 The application will be available at http://localhost:4200/.
 
-## Production Build
+Production Build
 To build an optimized production version of the application, run:
 
 ng build --configuration production
@@ -53,11 +53,13 @@ Services: Used to perform HTTP requests to the API.
 RxJS and Observables: Used for managing asynchronous operations and data streams.
 Unsubscribing from Observables: All subscriptions are properly unsubscribed in ngOnDestroy to prevent memory leaks.
 Code Typing: All code is strictly typed using TypeScript; the any type is not used.
-Best Practices
+
+## Best Practices
 Code Organization: The project is organized according to Angular recommendations to enhance readability and maintainability.
 Styling: SCSS is used for efficient and organized component styling.
 Responsive Design: The application is optimized to work on various devices, including mobile phones and computers.
-Design and Mockups
+
+## Design and Mockups
 The application's design is based on mockups provided by UX designer Omar. All user interfaces adhere to these specifications.
 
 Notes

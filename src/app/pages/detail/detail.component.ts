@@ -93,7 +93,11 @@ export class DetailComponent implements OnInit {
         (sum, p) => sum + p.athleteCount,
         0
       );
+    } else {
+      
+        this.errorMessage = 'Error loading country details';
     }
+
   }
 
   goBack(): void {
