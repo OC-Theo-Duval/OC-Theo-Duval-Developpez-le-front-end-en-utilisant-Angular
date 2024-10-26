@@ -1,3 +1,53 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="container">
+  <mat-card class="header-card">
+    <mat-card-title>Medals per Country</mat-card-title>
+  </mat-card>
+  
+  <div *ngIf="errorMessage" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="stats-container">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of JOs</p>
+        <h4 class="stat-value">{{ totalGames }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of countries</p>
+        <h4 class="stat-value">{{ barChartLabels.length }}</h4>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="chart-container">
+    <ngx-charts-pie-chart
+      [view]="view"
+      [results]="barChartData"
+      [labels]="true"
+      [tooltipDisabled]="false"
+      [animations]="true"
+    
+      (select)="onCountryClick($event)"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <div ngx-tooltip>
+          <p>
+            {{ model.name }}
+          </p>
+          <p>
+            <img class="img-medal" src="assets/fonts/icons/icons8.png" />
+            {{ model?.value }}
+          </p>
+        </div>
+      </ng-template>
+    </ngx-charts-pie-chart>
+  </div>
+</div>

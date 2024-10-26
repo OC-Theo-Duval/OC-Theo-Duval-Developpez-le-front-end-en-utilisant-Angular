@@ -1,0 +1,70 @@
+<div  class="container">
+  <mat-card *ngIf="errorMessage == ''" class="header-card">
+    <mat-card-title>{{ countryDetails?.country }}</mat-card-title>
+  </mat-card>
+
+  <div *ngIf="errorMessage" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="errorMessage == ''" class="stats-container">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Number of entries</p>
+        <h4 class="stat-value">
+          {{ countryDetails?.participations?.length || 0 }}
+        </h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Total number of medals</p>
+        <h4 class="stat-value">{{ totalMedals }}</h4>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <p class="stat-title">Total number of athletes</p>
+        <h4 class="stat-value">{{ totalAthletes }}</h4>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="errorMessage == ''" class="chart-container">
+    <ngx-charts-line-chart
+      [results]="lineChartData"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="false"
+      [xAxisLabel]="'Dates'"
+      [tooltipDisabled]="false"
+      [autoScale]="true"
+      [animations]="true"
+      [view]="view"
+    >
+      <ng-template #seriesTooltipTemplate let-model="model">
+        <div ngx-tooltip>
+          <p>
+            {{ model[0]?.name }}
+          </p>
+     
+          <p>
+            <img class="img-medal" src="assets/fonts/icons/icons8.png" />
+            {{ model[0]?.value  }}
+          </p>
+         
+        </div>
+      </ng-template>
+    </ngx-charts-line-chart>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="goBack()">Retour</button>
+</div>
