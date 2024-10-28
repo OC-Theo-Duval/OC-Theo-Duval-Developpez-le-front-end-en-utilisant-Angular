@@ -1,3 +1,7 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<app-header [title]="'Medals per Country'"></app-header>
+<section class="home-card-section" *ngIf="olympics$ | async as olympics">
+    <app-title-card [title]="'Number of JOs'" [desc]="(numberOfOlympics$ | async)?.toString() || '0'"></app-title-card>
+    <app-title-card [title]="'Number of countries'" [desc]="(numberOfCountries$ | async)?.toString() || '0'"></app-title-card>
+</section>
+
+<app-piechart></app-piechart>
