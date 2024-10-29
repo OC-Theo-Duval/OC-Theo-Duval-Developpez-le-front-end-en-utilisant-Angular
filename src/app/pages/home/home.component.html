@@ -1,3 +1,33 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="app-container">
+  <h2>Olympic games app </h2>
+  <i class="fas fa-medal"></i>
+  <hr />
+  <div class="title">
+    <h1>Medals per Country</h1>
+  </div>
+  <div class="aligne-sous-title">
+    <div class="sous-title">
+      <div>
+        <h2 style="margin-bottom: 1px;color: #646464;">Number of JOs </h2>
+      </div>
+      <div>
+        <h2 style="margin-top: 1px;">{{ getNumberParticipation() | async}}</h2>
+      </div>
+    </div>
+    <div class="sous-title">
+      <div>
+        <h2 style="margin-bottom: 1px;color: #646464;">Number of Countries</h2>
+      </div>
+      <div>
+        <h2 style="margin-top: 1px;">{{ (olympics$ | async)?.length }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Utilisation de async pour passer les résultats -->
+  <div class="chart-container">
+    <ngx-charts-pie-chart [results]="(medals$ | async)" [labels]="showLabels" [doughnut]="isDoughnut" [gradient]="false"
+      [explodeSlices]="false" [arcWidth]="0.25" [scheme]="customColorScheme" [tooltipText]="getTooltipText.bind(this)"
+      (select)="onCountryClick($event)"></ngx-charts-pie-chart>
+  </div>
+</div>
