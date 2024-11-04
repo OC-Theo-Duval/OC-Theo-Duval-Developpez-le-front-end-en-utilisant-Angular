@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , HostListener } from '@angular/core';
 import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
+
+
 
 @Component({
   selector: 'app-piechart',
@@ -19,10 +21,18 @@ export class PiechartComponent implements OnInit {
     name: 'cool',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#f00', '#0f0', '#0ff', '#ff0', '#f0f'],
+    domain: ['#793d52', '#89a1db', '#9780a1', '#bfe0f1', '#956065'],
   };
+  public view: [number, number] = [0, 0];
+  public tooltipData: any;
+  public tooltipX: number;
+  public tooltipY: number;
 
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  constructor(private olympicService: OlympicService, private router: Router) {
+    this.updateChartSize();
+    this.tooltipX = 0; 
+    this.tooltipY = 0; 
+  }
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
@@ -39,6 +49,19 @@ export class PiechartComponent implements OnInit {
         });
       })
     );
+    this.updateChartSize();
+    
   }
+    @HostListener('window:resize', ['$event'])
+    onResize(event: any): void {
+      this.updateChartSize();
+    }
+  
+    updateChartSize(): void {
+      this.view = [window.innerWidth * 0.7, window.innerHeight * 0.79];
+    }
 
-}
+    onClick(data: any): void {
+      this.router.navigate(['/detail', data.name]);
+    }
+  }

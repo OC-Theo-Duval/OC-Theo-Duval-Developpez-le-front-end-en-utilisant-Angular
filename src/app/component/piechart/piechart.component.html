@@ -1,11 +1,25 @@
 <ngx-charts-pie-chart
-  [view]="[700, 400]"
+  
+  [view]="view"
   [scheme]="colorScheme"
   [results]="graphData$ | async"
   [gradient]="true"
-  [legend]="true"
+  [legend]="false"
   [doughnut]="false"
   [labels]="true"
   [tooltipDisabled]="false"
-  [animations]="true">
+  [animations]="true"
+  (select)="onClick($event)">
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="pie-chart__tooltip">
+      <p>{{ model.name }}</p>
+      <div class="pie-chart__tooltip--count">
+        <i class="fa-solid fa-medal"></i>
+        <p>
+          {{ model.value }}
+        </p>
+      </div>
+    </div>
+  </ng-template>
 </ngx-charts-pie-chart>
+

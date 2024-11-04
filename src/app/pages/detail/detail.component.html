@@ -1,0 +1,8 @@
+<app-header [title]="country"></app-header>
+<section class="home-card-section" *ngIf="country">
+  <app-title-card [title]="'Number of entries'" [desc]="(numberOfEntries$ | async)?.toString() || '0'"></app-title-card>
+  <app-title-card [title]="'Total number medals'" [desc]="(totalNumberOfMedals$ | async)?.toString() || '0'"></app-title-card>
+  <app-title-card [title]="'Total number of athletes'" [desc]="(totalNumberOfAthletes$ | async)?.toString() || '0'"></app-title-card>
+</section>
+
+<app-linechart></app-linechart>
