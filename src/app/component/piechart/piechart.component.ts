@@ -58,7 +58,9 @@ export class PiechartComponent implements OnInit {
     }
   
     updateChartSize(): void {
-      this.view = [window.innerWidth * 0.7, window.innerHeight * 0.79];
+      const width = window.innerWidth;
+      const heightRatio = width <= 740 ? 0.37 : 0.6;
+      this.view = [width * 0.7, window.innerHeight * heightRatio];
     }
 
     onClick(data: any): void {

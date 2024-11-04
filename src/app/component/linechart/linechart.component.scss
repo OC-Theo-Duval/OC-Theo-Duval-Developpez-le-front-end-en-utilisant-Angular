@@ -4,3 +4,32 @@ ngx-charts-line-chart {
     justify-content: center;
   }
   
+  .line-chart__tooltip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 90px;
+    font-size: 20px;
+    background-color: #04838f;
+  }
+
+  .line-chart__tooltip--count {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+  }
+
+  .line-chart__tooltip--count  svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    
+  }

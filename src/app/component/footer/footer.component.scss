@@ -1,0 +1,19 @@
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #04838f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #005a63;
+  }

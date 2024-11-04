@@ -1,34 +1,33 @@
 ngx-charts-pie-chart {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .pie-chart__tooltip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 130px;
-    height: 90px;
-    font-size: 20px;
-    background-color: #04838f;
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: -70px;
+}
 
-  .pie-chart__tooltip--count {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-    font-size: 20px;
-    color: #fff;
-    display: flex;
-  }
+.pie-chart__tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 90px;
+  font-size: 20px;
+  background-color: #04838f;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
 
-  .pie-chart__tooltip--count  svg{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25px;
-    
-  }
+.pie-chart__tooltip--count {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.pie-chart__tooltip--count svg {
+  display: flex;
+}

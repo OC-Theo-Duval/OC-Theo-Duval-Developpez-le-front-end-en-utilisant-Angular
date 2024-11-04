@@ -9,5 +9,16 @@
   [showYAxisLabel]="true"
   [xAxisLabel]="'Date'"
   [yAxisLabel]="'Medals Count'"
-  [autoScale]="true">
+  [autoScale]="true"
+  [tooltipDisabled]="false">
 </ngx-charts-line-chart>
+
+<ng-template #customTooltipTemplate let-model="model">
+  <div class="line-chart__tooltip">
+    <p>{{ model.name }}</p>
+    <div class="line-chart__tooltip--count">
+      <i class="fa-solid fa-medal"></i>
+      <p>{{ model.value }}</p>
+    </div>
+  </div>
+</ng-template>

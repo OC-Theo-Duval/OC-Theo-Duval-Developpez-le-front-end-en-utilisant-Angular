@@ -23,9 +23,14 @@ export class LinechartComponent implements OnInit {
   };
   public view: [number, number] = [0, 0];
   public country: string = '';
+  public tooltipData: any;
+  public tooltipX: number;
+  public tooltipY: number;
 
   constructor(private olympicService: OlympicService, private route: ActivatedRoute) {
     this.updateChartSize();
+    this.tooltipX = 0; 
+    this.tooltipY = 0; 
   }
 
   ngOnInit(): void {
