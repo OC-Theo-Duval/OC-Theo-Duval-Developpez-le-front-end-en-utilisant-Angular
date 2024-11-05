@@ -11,15 +11,13 @@
   [animations]="false"
   (select)="onClick($event)">
   <ng-template #tooltipTemplate let-model="model">
-    <div class="pie-chart__tooltip">
+    <div ngx-tooltip>
       <p>{{ model.name }}</p>
-      <div class="pie-chart__tooltip--count">
-        <i class="fa-solid fa-medal"></i>
         <p>
+          <i class="fa-solid fa-medal"></i>
           {{ model.value }}
         </p>
       </div>
-    </div>
   </ng-template>
 </ngx-charts-pie-chart>
 

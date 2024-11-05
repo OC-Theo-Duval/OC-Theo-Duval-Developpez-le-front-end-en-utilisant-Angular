@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, catchError } from 'rxjs/operators';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -15,8 +15,9 @@ export class DetailComponent implements OnInit {
   totalNumberOfMedals$: Observable<number> = of(0);
   totalNumberOfAthletes$: Observable<number> = of(0);
   lineChartData$: Observable<any[]> = of([]);
+  errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private olympicService: OlympicService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private olympicService: OlympicService) { }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -24,7 +25,17 @@ export class DetailComponent implements OnInit {
       switchMap(country => {
         this.country = country;
         return this.olympicService.getOlympics().pipe(
-          map(olympics => olympics.find(olympic => olympic.country === country))
+          map(olympics => {
+            const olympic = olympics.find(olympic => olympic.country === country);
+            if (!olympic) {
+              throw new Error('Country not found');
+            }
+            return olympic;
+          }),
+          catchError(error => {
+            this.errorMessage = error.message;
+            return of(null);
+          })
         );
       })
     ).subscribe(olympic => {
@@ -36,6 +47,8 @@ export class DetailComponent implements OnInit {
           name: p.year.toString(),
           value: p.medalsCount
         })));
+      } else {
+        this.router.navigate(['/not-found']);
       }
     });
   }

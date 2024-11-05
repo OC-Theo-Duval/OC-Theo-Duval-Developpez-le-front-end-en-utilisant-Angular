@@ -1,7 +1,7 @@
 ngx-charts-pie-chart {
   display: flex;
   justify-content: center;
-  margin-top: -70px;
+
 }
 
 .pie-chart__tooltip {
@@ -30,4 +30,10 @@ ngx-charts-pie-chart {
 
 .pie-chart__tooltip--count svg {
   display: flex;
+}
+
+
+::ng-deep .ngx-charts-tooltip-content.type-tooltip {
+  background-color: #04838f !important;
+  color: white !important;
 }

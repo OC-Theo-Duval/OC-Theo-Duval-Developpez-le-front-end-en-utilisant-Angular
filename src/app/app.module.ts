@@ -12,12 +12,12 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailComponent } from './pages/detail/detail.component';
 import { LinechartComponent } from 'src/app/component/linechart/linechart.component';
-
+import { FooterComponent } from './component/footer/footer.component';
 
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent , DetailComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, HeaderComponent, PiechartComponent, TitleCardComponent, NgxChartsModule, FontAwesomeModule,LinechartComponent ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, HeaderComponent, PiechartComponent, TitleCardComponent, NgxChartsModule, FontAwesomeModule,LinechartComponent, FooterComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
