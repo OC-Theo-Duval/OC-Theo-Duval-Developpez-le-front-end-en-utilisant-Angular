@@ -4,7 +4,7 @@
 
 The application features:
 - A **home page** with a pie chart displaying the number of medals won by each country.
-- General information about the Olympic Games.
+- A **detail page** with a pie chart displaying the number of medals won by selected country.
 - An interactive chart experience: users can click on a segment of the pie chart to view detailed, country-specific data in a dynamic line chart format.
 
 This project showcases key Angular concepts, such as reusable components, routing, and service integration, all applied within a data-driven application.
