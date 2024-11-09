@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
@@ -9,18 +9,19 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   country: string = '';
   numberOfEntries$: Observable<number> = of(0);
   totalNumberOfMedals$: Observable<number> = of(0);
   totalNumberOfAthletes$: Observable<number> = of(0);
   lineChartData$: Observable<any[]> = of([]);
   errorMessage: string = '';
+  private subscription: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, private router: Router, private olympicService: OlympicService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
+    this.subscription = this.route.paramMap.pipe(
       map(params => params.get('country')!),
       switchMap(country => {
         this.country = country;
@@ -51,5 +52,9 @@ export class DetailComponent implements OnInit {
         this.router.navigate(['/not-found']);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
