@@ -26,7 +26,6 @@ export class OlympicService {
       catchError((error: HttpErrorResponse, caught: Observable<OlympicCountry[]>) => {
               console.error('Error status:', error.status);
               console.error('Error message:', error.message);
-              // can be useful to end loading state and let the user know something went wrong
               this.olympics$.next([]);
               return throwError(() => new Error('Something went wrong; please try again later.'));
             })

@@ -3,7 +3,7 @@ import { NgxChartsModule, Color, ScaleType } from '@swimlane/ngx-charts';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Observable, of, map, switchMap } from 'rxjs';
 import { OlympicCountry } from 'src/app/core/models/Olympic';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-linechart',
@@ -23,26 +23,24 @@ export class LinechartComponent implements OnInit {
   };
   public view: [number, number] = [0, 0];
   public country: string = '';
-  public tooltipData: any;
-  public tooltipX: number;
-  public tooltipY: number;
+  public tooltipData: { name: string, value: number } | null = null;
+  public tooltipX: number = 0;
+  public tooltipY: number = 0;
 
   constructor(private olympicService: OlympicService, private route: ActivatedRoute) {
     this.updateChartSize();
-    this.tooltipX = 0; 
-    this.tooltipY = 0; 
   }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
-      map(params => params.get('country')!),
-      switchMap(country => {
+      map((params: ParamMap) => params.get('country')!),
+      switchMap((country: string) => {
         this.country = country;
         return this.olympicService.getOlympics().pipe(
-          map(olympics => olympics.find(olympic => olympic.country === country))
+          map((olympics: OlympicCountry[]) => olympics.find(olympic => olympic.country === country))
         );
       })
-    ).subscribe(olympic => {
+    ).subscribe((olympic: OlympicCountry | undefined) => {
       if (olympic) {
         this.lineChartData$ = of([{
           name: olympic.country,
@@ -53,11 +51,10 @@ export class LinechartComponent implements OnInit {
         }]);
       }
     });
-    this.updateChartSize();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
+  onResize(event: Event): void {
     this.updateChartSize();
   }
 

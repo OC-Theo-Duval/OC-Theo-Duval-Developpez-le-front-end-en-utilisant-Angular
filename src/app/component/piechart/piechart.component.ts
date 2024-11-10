@@ -24,7 +24,7 @@ export class PiechartComponent implements OnInit {
     domain: ['#793d52', '#89a1db', '#9780a1', '#bfe0f1', '#956065'],
   };
   public view: [number, number] = [0, 0];
-  public tooltipData: any;
+  public tooltipData: { name: string, value: number } | null = null;
   public tooltipX: number;
   public tooltipY: number;
 
