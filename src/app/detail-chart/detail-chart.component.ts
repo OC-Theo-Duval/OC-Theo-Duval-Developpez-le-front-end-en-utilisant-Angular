@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../core/_services/shared-data.service';
 import { Chart } from 'chart.js';
-import { share, take } from 'rxjs';
 
 @Component({
   selector: 'app-detail-chart',
@@ -44,26 +43,26 @@ export class DetailChartComponent implements OnInit {
       this.data.push(clickedData);
 
       if(this.data != null){
-        
+
         for(let i = 0; i < this.data.length; i++){
 
           // Calcul du nombre d'entrée au JO pour le pays selectionné
           this.numberEntries = this.data[i].participations.length;
-          
+
           this.countAthletes = 0;
           for(let cAth of this.data[i].participations){
             //Ajout de la somme des athletes pour chaque JOs
-            this.countAthletes += cAth.athleteCount;     
-            
+            this.countAthletes += cAth.athleteCount;
+
             //Ajout des médaille à la list des médailles
-            this.listmedal.push(cAth.medalsCount);    
-            
+            this.listmedal.push(cAth.medalsCount);
+
             //Ajout des années de participation à la liste des années
             this.listyear.push(cAth.year)
           }
-          //Attribution de la somme 
+          //Attribution de la somme
           this.totalAthletes.push(this.countAthletes);
-        }        
+        }
       }
     })
 
