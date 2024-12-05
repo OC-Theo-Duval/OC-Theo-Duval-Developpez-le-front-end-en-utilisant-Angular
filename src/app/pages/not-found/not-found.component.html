@@ -1,4 +1,31 @@
 <div class="center">
-  <h2>No corresponding page found</h2>
-  <a routerLink="">Go back</a>
+  <div class="header">
+    <div class="back-button">
+      <button (click)="goBack()">← Back</button>
+    </div>
+    <div class="country-name" *ngIf="country">
+      {{ country.country }}
+    </div>
+  </div>
+    
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-label">Number of entries</div>
+        <div class="stat-value">{{ getNumberOfEntries() }}</div>
+      </div>
+      
+      <div class="stat-box">
+        <div class="stat-label">Total number medals</div>
+        <div class="stat-value">{{ getTotalMedals() }}</div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">Total number athletes</div>
+        <div class="stat-value">{{ getNumberOfAthletes() }}</div>
+      </div>
+    </div>
+    
+  <div class="chart-container">
+    <canvas id="participationsChart"></canvas>
+  </div>
 </div>
