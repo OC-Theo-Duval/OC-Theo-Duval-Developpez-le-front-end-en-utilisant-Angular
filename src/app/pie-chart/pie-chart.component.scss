@@ -1,10 +1,25 @@
 .chart-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-#MyChart{
-    border-radius: 25px;
-    padding: 20px;
+#MyChart {
+  border-radius: 25px;
+  padding: 20px;
+}
+
+
+@media (max-width: 407px) {
+  #MyChart {
+    height: 300px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 327px) {
+  #MyChart {
+    height: 270px;
+    width: 270px;
+  }
 }

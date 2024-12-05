@@ -1,3 +1,10 @@
+/* Voir élément plus grand afin de debogger */
+// *{
+//    box-shadow: 0 0 0 3px red
+//    inset;
+//}
+
+
 .conteneur {
   display: grid;
   align-items: baseline;
@@ -34,7 +41,12 @@ a:hover {
 
 .header-label {
   display: flex;
+  justify-content: center;
   font-size: xx-large;
+  border: none;
+  border-radius: 5px;
+  background: #04838F;
+  color: white;
 }
 
 .three {
@@ -57,16 +69,19 @@ a:hover {
 }
 
 .info-content {
-  padding: 5px 0 5px 0;
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  border: 2px solid black;
+  border: 2px solid #04838F;
   border-radius: 10px;
   align-items: center;
+  padding: 5px 0;
 }
 
-section:last-child {
+.info-content label:nth-child(1) {
+  opacity: 0.5;
+}
+
+.info-content label:last-child {
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -78,12 +93,6 @@ section:last-child {
   grid-row-end: 7;
   grid-column-start: 1;
   grid-column-end: 8;
-}
-
-.card {
-  background: #e6e3e3ea;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .chart-container {

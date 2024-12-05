@@ -71,17 +71,22 @@ export class PieChartComponent implements OnInit {
           label: this.Medaille,
           data: this.medaldata,
           backgroundColor: [
-            '#009246',
-            '#AD1519',
-            'pink',
-            '#FFCC00',
-            '#318ce7',
+            //Italie
+            '#956065',
+            //Spain
+            '#B8CDE7',
+            // USA
+            '#89A1DB',
+            //Germany
+            '#793D62',
+            // FR
+            '#9780A1',
           ],
           hoverOffset: 20
         }],
       },
       options: {
-        
+
         responsive: true,
         maintainAspectRatio: false,
 
