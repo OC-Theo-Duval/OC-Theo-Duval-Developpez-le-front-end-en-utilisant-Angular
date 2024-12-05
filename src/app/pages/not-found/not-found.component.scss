@@ -2,7 +2,92 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;  // Changed from center to flex-start
   align-items: center;
   flex-direction: column;
+  padding-top: 10px;  // Add some padding from the top
+}
+.country-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.country-name {
+  margin: 0 auto;
+  background-color: #008B8B;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 25px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stats-container {
+  display: flex;
+  gap: 20px;  // Reduced gap between boxes
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;  // Add some space from the header
+}
+
+.stat-box {
+  border: 2px solid #008B8B;
+  border-radius: 8px;
+  padding: 12px;  // Reduced padding
+  min-width: 150px;  // Reduced width
+  text-align: center;
+  
+  .stat-label {
+    color: #666;
+    margin-bottom: 8px;  // Reduced margin
+    font-size: 14px;  // Reduced font size
+  }
+  
+  .stat-value {
+    color: #000;
+    font-size: 20px;  // Reduced font size
+    font-weight: bold;
+  }
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.back-button {
+  position: absolute;
+  left: 20px;
+
+  button {
+    background-color: #008B8B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+    
+    &:hover {
+      background-color: #006666;
+    }
+  }
+}
+
+.chart-container {
+  width: 600px;  // Reduced width
+  height: 300px;  // Reduced height
+  margin-top: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
