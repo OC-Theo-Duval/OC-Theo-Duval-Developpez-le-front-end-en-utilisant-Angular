@@ -1,0 +1,41 @@
+<div class="center">
+    <div class="header">
+      <div class="back-button">
+        <button (click)="goBack()">Go Back</button>
+      </div>
+        <div class="country-name">{{ country.country }}</div>
+    </div>
+      
+      <div class="stats-container">
+        <div class="stat-box">
+          <div class="stat-label">Number of entries</div>
+          <div class="stat-value">{{ olympicService.getNumberOfEntries(country) }}</div>
+        </div>
+        
+        <div class="stat-box">
+          <div class="stat-label">Total number medals</div>
+          <div class="stat-value">{{ olympicService.getCountryMedals(country) }}</div>
+        </div>
+ 
+        <div class="stat-box">
+          <div class="stat-label">Total number athletes</div>
+          <div class="stat-value">{{ olympicService.getNumberOfAthletes(country) }}</div>
+        </div>
+      </div>
+        
+      <div class="chart-container" *ngIf="lineChartData.length > 0">
+        <ngx-charts-line-chart
+          [view]="view"
+          [results]="lineChartData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel">
+        </ngx-charts-line-chart>
+      </div>
+  </div>
+  

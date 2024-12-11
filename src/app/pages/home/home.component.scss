@@ -115,31 +115,34 @@
     padding: 0 20px;
 }
 
-.medal-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    margin: 8px 0;
-    border: 2px solid #0f5c32;
-    border-radius: 10px;
-    background: white;
+// .medal-item {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 10px 15px;
+//     margin: 8px 0;
+//     border: 2px solid #0f5c32;
+//     border-radius: 10px;
+//     background: white;
     
-    .country-name {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 16px;
-        color: #333;
-    }
+//     .country-name {
+//         font-family: 'Montserrat', sans-serif;
+//         font-size: 16px;
+//         color: #333;
+//     }
     
-    .medal-count {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 18px;
-        font-weight: 600;
-        color: #0f5c32;
-    }
-}
+//     .medal-count {
+//         font-family: 'Montserrat', sans-serif;
+//         font-size: 18px;
+//         font-weight: 600;
+//         color: #0f5c32;
+//     }
+// }
 
 .chart-container {
-    width: 70%; // or any specific width like 800px
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
   }

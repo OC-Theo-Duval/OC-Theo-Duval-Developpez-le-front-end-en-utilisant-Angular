@@ -13,12 +13,12 @@
         <div class="stats-container">
             <div class="title-box">
                 <div class="title-text">Number of JOs</div>
-                <div class="count">{{ getNumberOfJOs(olympics) }}</div>
+                <div class="count">{{ olympicService.getNumberOfJOs(olympics) }}</div>
             </div>
 
             <div class="title-box">
                 <div class="title-text">Number of Countries</div>
-                <div class="count">{{ getNumberOfCountries(olympics)  }}</div>
+                <div class="count">{{ olympicService.getNumberOfCountries(olympics) }}</div>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="total-medals-container">
             <div class="title-box">
                 <div class="title-text">Total of medals</div>
-                <div class="count">{{ getTotalMedals(olympics) }}</div>
+                <div class="count">{{ olympicService.getTotalMedals(olympics) }}</div>
             </div>
         </div>
     </div>
@@ -37,9 +37,14 @@
     <hr class="divider">
 
     <div class="chart-container">
-        <canvas id="olympicsChart"></canvas>
+        <ngx-charts-pie-chart
+            [view]="view"
+            [results]="chartData"
+            [gradient]="gradient"
+            [labels]="showLabels"
+            [doughnut]="isDoughnut"
+            (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
     </div>
-
-   
 </div>
-
+   
