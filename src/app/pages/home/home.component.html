@@ -1,3 +1,25 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="container">
+  <div class="header">
+    <img src="../../../assets/images/TeleSport.png" alt="TeleSportPNG">
+  </div>
+
+  <div class="header-text">
+    <h6>Medals per Country</h6>
+  </div>
+
+  <div class="info">
+    <div class="bulle">
+      <label for="">Number of JOs</label>
+      <label for="">10</label>
+    </div>
+    <div class="bulle">
+      <label for="">Number of countries</label>
+      <label>10</label>
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="content">
+      <app-pie-chart></app-pie-chart>
+    </div>
+  </div>
+</div>

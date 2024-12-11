@@ -5,10 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { DetailChartComponent } from './detail-chart/detail-chart.component';
+import { PieChartRoutingModule } from './pie-chart/pie-chart-routing.module';
+import { TooltipModule } from 'ng2-tooltip-directive';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NotFoundComponent,
+    PieChartComponent,
+    DetailChartComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PieChartRoutingModule,
+    HttpClientModule,
+    TooltipModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

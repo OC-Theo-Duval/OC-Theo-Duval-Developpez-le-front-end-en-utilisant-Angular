@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './pages/home/home.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {DetailChartComponent} from './detail-chart/detail-chart.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,14 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: '**', // wildcard
+    path: 'detail-chart', component: DetailChartComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  },
+  {
+    path: 'error',
     component: NotFoundComponent,
   },
 ];
@@ -18,4 +26,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

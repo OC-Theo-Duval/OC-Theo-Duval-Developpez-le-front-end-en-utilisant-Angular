@@ -1,0 +1,33 @@
+<div class="conteneur">
+    <div class="one">
+        <a routerLink="/">Home</a>
+    </div>
+    <div class="two">
+        <div class="header-label">
+            {{ labeldata }}
+        </div>
+    </div>
+    <div class="three">
+        <div class="info-content">
+            <label>Numbers of entries</label>
+            <label>{{ numberEntries }}</label>
+        </div>
+    </div>
+    <div class="four">
+        <div class="info-content">
+            <label> Total number medals</label>
+            <label> {{ medaldata }}</label>
+        </div>
+    </div>
+    <div class="five">
+        <div class="info-content">
+            <label>Number of athletes</label>
+            <label>{{ totalAthletes }}</label>
+        </div>
+    </div>
+    <div class="six">
+            <div class="chart-container">
+                <canvas id="MyChart">{{ chartdata }}</canvas>
+            </div>
+    </div>
+</div>

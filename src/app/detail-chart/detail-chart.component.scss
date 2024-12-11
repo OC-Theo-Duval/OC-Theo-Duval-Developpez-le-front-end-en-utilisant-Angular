@@ -1,0 +1,101 @@
+/* Voir élément plus grand afin de debogger */
+// *{
+//    box-shadow: 0 0 0 3px red
+//    inset;
+//}
+
+
+.conteneur {
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px 100px 100px 100px 100px;
+}
+
+.one {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 1;
+}
+
+a {
+  background: black;
+  border: 2px;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  font-size: medium;
+  font-style: normal;
+}
+
+a:hover {
+  background: rgb(29, 113, 209);
+}
+
+.two {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 4;
+}
+
+.header-label {
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+  border: none;
+  border-radius: 5px;
+  background: #04838F;
+  color: white;
+}
+
+.three {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 2;
+}
+
+
+.four {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 4;
+}
+
+.five {
+  grid-row-start: 2;
+  grid-row-end: 2;
+  grid-column-start: 6;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #04838F;
+  border-radius: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.info-content label:nth-child(1) {
+  opacity: 0.5;
+}
+
+.info-content label:last-child {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.six {
+  grid-row-start: 3;
+  grid-row-end: 7;
+  grid-column-start: 1;
+  grid-column-end: 8;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+}
