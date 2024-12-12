@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap,map } from 'rxjs/operators';
+import { Country } from '../models/Country';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
-  getCountry(id?: string): Observable<any> {
+  getCountrybyid(id?: string): Observable<any> {
     const countryId = id || this.getLastCountryId();
     if (!countryId) {
       console.warn('No ID provided or stored');
@@ -63,6 +64,36 @@ export class OlympicService {
     );
   }
 
+  // getCountrybyidbis(id?: string): Observable<Country> {
+  //   return this.olympics$.asObservable().pipe(
+  //     map(
+  //       (olympics) => {
+  //         return olympics.find((country: any) => country.id.toString() === id);
+  //       }
+  //       ),
+
+  //       catchError((error, caught) => {
+  //         console.error('Error occurred while fetching country data:', error);
+  //         return caught;
+  //       })
+  //   );
+  // }
+
+  // getNumberOfAthletesbis(country: Observable<Country>): Observable<number>{
+  //   return country.pipe(
+  //     map((country) => country.participations.reduce((total, participation) => 
+  //       total + participation.athleteCount, 0)),
+      
+  //     catchError((error, caught) => {
+  //         console.error('Error occurred while fetching country data:', error);
+  //         return caught;
+  //       })
+  //   );
+    
+  // }
+
+
+  
     private storeLastCountryId(id: string): void {
     localStorage.setItem('lastCountryId', id);
   }
@@ -119,5 +150,12 @@ export class OlympicService {
       total + participation.athleteCount, 0) || 0;
   }
 
+  getChartDimensions(width: number): [number, number] {
+    if (width < 768) {
+      return [width * 0.9, 300]; // Adjust for mobile
+    } else {
+      return [700, 400]; // Default for larger screens
+    }
+  }
   
 }

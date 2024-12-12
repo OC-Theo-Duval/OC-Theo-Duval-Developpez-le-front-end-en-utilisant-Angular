@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+      this.updateChartDimensions(window.innerWidth);
       this.olympics$ = this.olympicService.getOlympics();
       this.olympics$.subscribe(data => {
         if (data) {
@@ -46,8 +47,12 @@ export class HomeComponent implements OnInit {
             return {
               name: country.country,
               value: this.olympicService.getTotalMedals([country]),
+              displayValue: `${this.olympicService.getTotalMedals([country])} medals`,
+              
               // id: country.id, // ID is not used directly in the chart
+              
               country: country
+
             };
           });
           console.log('Chart Data:', this.chartData);
@@ -65,5 +70,14 @@ export class HomeComponent implements OnInit {
         console.error('Country ID not found for name:', countryName);
       }
     }
+
+    @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateChartDimensions(event.target.innerWidth);
+  }
+
+  updateChartDimensions(width: number) {
+       this.view = this.olympicService.getChartDimensions(width);
+     }
   }
   

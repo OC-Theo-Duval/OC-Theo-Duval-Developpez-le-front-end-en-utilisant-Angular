@@ -1,11 +1,12 @@
 <div class="center">
-    <div class="header">
-      <div class="back-button">
-        <button (click)="goBack()">Go Back</button>
-      </div>
-        <div class="country-name">{{ country.country }}</div>
-    </div>
-      
+  
+<div class="back-button">
+      <button (click)="goBack()">Go Back</button>
+</div>
+
+  <!-- <div class="stat-value">{{ participantdata | async }}</div> -->
+  <div class="country-name">{{ country.country }}</div>
+
       <div class="stats-container">
         <div class="stat-box">
           <div class="stat-label">Number of entries</div>
@@ -22,7 +23,9 @@
           <div class="stat-value">{{ olympicService.getNumberOfAthletes(country) }}</div>
         </div>
       </div>
-        
+
+       <hr class="divider">
+
       <div class="chart-container" *ngIf="lineChartData.length > 0">
         <ngx-charts-line-chart
           [view]="view"
@@ -30,7 +33,6 @@
           [gradient]="gradient"
           [xAxis]="showXAxis"
           [yAxis]="showYAxis"
-          [legend]="showLegend"
           [showXAxisLabel]="showXAxisLabel"
           [showYAxisLabel]="showYAxisLabel"
           [xAxisLabel]="xAxisLabel"
@@ -38,4 +40,6 @@
         </ngx-charts-line-chart>
       </div>
   </div>
-  
+
+
+ 
