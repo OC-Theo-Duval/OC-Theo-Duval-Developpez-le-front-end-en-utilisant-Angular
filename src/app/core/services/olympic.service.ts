@@ -9,146 +9,146 @@ import { Country } from '../models/Country';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<Country[]>([]);
 
   constructor(private http: HttpClient) {
-    // Load data automatically when service is instantiated
-    this.loadInitialData().subscribe();
+    const storedData = localStorage.getItem('olympicsData');
+    if (storedData) {
+      this.olympics$.next(JSON.parse(storedData)); // Load data from local storage
+    } else {
+      this.loadInitialData(); // Fetch data if not in local storage
+    }
   }
 
-  loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value) => {
-        console.log('Loaded Olympics Data:', value); // Log the loaded data
-        this.olympics$.next(value);
-        //this.saveToLocalStorage(value);
+  loadInitialData(): void {
+    this.http.get<Country[]>(this.olympicUrl).pipe(
+      tap((data) => {
+        console.log('Full Olympics Data:', data);
+        localStorage.setItem('olympicsData', JSON.stringify(data)); 
+        this.olympics$.next(data); // Populate the BehaviorSubject
       }),
-      catchError((error, caught) => {
-        console.error(error);
-        this.olympics$.next(null);
-        return caught;
+      catchError((error) => {
+        console.error('Error loading data:', error);
+        this.olympics$.next([]); // Set to an empty array on error
+        return of([]); // Return an empty array
       })
-    );
+    ).subscribe(); // Subscribe to trigger the HTTP request
   }
-
+  refreshData(): void {
+    this.loadInitialData(); // Call the method to reload data
+  }
   getOlympics() {
     return this.olympics$.asObservable();
   }
 
-  getCountrybyid(id?: string): Observable<any> {
-    const countryId = id || this.getLastCountryId();
-    if (!countryId) {
-      console.warn('No ID provided or stored');
-      return of(null);
-    }
+  // Mise à jour de la fonction qui permet de récupérer un pays par son id en observable pour l'utilisation de l'interface Country  
 
+  getCountrybyidv2(id?: number): Observable<Country> {
     return this.olympics$.asObservable().pipe(
       map((olympics) => {
-        if (!olympics || olympics.length === 0) {
-          console.error('Olympics data is not loaded');
-          return this.getStoredCountry(countryId); // Attempt to retrieve from local storage
-        }
-        const country = olympics.find((o: any) => o.id.toString() === countryId);
+        console.log("ID being searched for:", id); // Log the ID being searched
+        console.log("Full AGAIN Olympics data:", olympics); // Log the current olympics data
+        const country = olympics.find((country: Country) => country.id === id);
         if (!country) {
-          console.error(`Country with ID ${countryId} not found`);
-        } else {
-          this.storeLastCountryId(countryId);
-          this.storeOlympicsData(olympics); // Store the data in local storage
+          throw new Error(`Country with ID ${id} not found`);
         }
         return country;
       }),
       catchError((error) => {
         console.error('Error occurred while fetching country data:', error);
-        return of(null);
-      })
+        throw error;
+        })
     );
   }
 
-  // getCountrybyidbis(id?: string): Observable<Country> {
-  //   return this.olympics$.asObservable().pipe(
-  //     map(
-  //       (olympics) => {
-  //         return olympics.find((country: any) => country.id.toString() === id);
-  //       }
-  //       ),
+// Function to get the number of countries from an observable
+getNumberOfCountriesv2(olympics$: Observable<Country[]>): Observable<number> {
+  return olympics$.pipe(
+    map((olympics) => olympics.length), // Return the length of the array
+    catchError((error) => {
+      console.error('Error occurred while fetching number of countries:', error);
+      return of(0); // Return 0 in case of error
+    })
+  );
+}
 
-  //       catchError((error, caught) => {
-  //         console.error('Error occurred while fetching country data:', error);
-  //         return caught;
-  //       })
-  //   );
-  // }
-
-  // getNumberOfAthletesbis(country: Observable<Country>): Observable<number>{
-  //   return country.pipe(
-  //     map((country) => country.participations.reduce((total, participation) => 
-  //       total + participation.athleteCount, 0)),
-      
-  //     catchError((error, caught) => {
-  //         console.error('Error occurred while fetching country data:', error);
-  //         return caught;
-  //       })
-  //   );
-    
-  // }
-
-
-  
-    private storeLastCountryId(id: string): void {
-    localStorage.setItem('lastCountryId', id);
-  }
-
-  private getLastCountryId(): string | null {
-    return localStorage.getItem('lastCountryId');
-  }
-
-  private storeOlympicsData(data: any[]): void {
-    localStorage.setItem('olympicsData', JSON.stringify(data));
-  }
-
-  private getStoredOlympicsData(): any[] | null {
-    const data = localStorage.getItem('olympicsData');
-    return data ? JSON.parse(data) : null;
-  }
-
-  private getStoredCountry(id: string): any | null {
-    const data = this.getStoredOlympicsData();
-    return data ? data.find((o: any) => o.id.toString() === id) : null;
-  }
-  
-  getNumberOfCountries(olympics: any[]): number {
-    return olympics.length;
-  }
-
-  getNumberOfJOs(olympics: any[]): number {
-    let maxId = 0;
-    olympics.forEach(country => {
-      country.participations.forEach((participation: { id: number }) => {
-        if (participation.id > maxId) {
-          maxId = participation.id;
-        }
+// Function to get the maximum ID of participations from an observable
+getNumberOfJOsv2(olympics$: Observable<Country[]>): Observable<number> {
+  return olympics$.pipe(
+    map((olympics) => {
+      let maxId = 0;
+      olympics.forEach(country => {
+        country.participations.forEach((participation: { id: number }) => {
+          if (participation.id > maxId) {
+            maxId = participation.id; // Update maxId if a larger ID is found
+          }
+        });
       });
-    });
-    return maxId;
-  }
+      return maxId; // Return the maximum ID found
+    }),
+    catchError((error) => {
+      console.error('Error occurred while fetching number of JOs:', error);
+      return of(0); // Return 0 in case of error
+    })
+  );
+}
 
-  getCountryMedals(country: any): number {
-    return country.participations.reduce((total: number, participation: any) => 
-      total + participation.medalsCount, 0);
-  }
+// Function to get the total number of medals from an observable of countries
+getTotalMedalsv2(olympics$: Observable<Country[]>): Observable<number> {
+  return olympics$.pipe(
+    map((olympics) => {
+      // Use reduce to calculate the total medals for all countries
+      return olympics.reduce((totalMedals, country) => {
+        // Sum the medals for the current country
+        const countryTotalMedals = country.participations.reduce((total, participation) => 
+          total + participation.medalsCount, 0
+        );
+        // Add the current country's total to the overall total
+        return totalMedals + countryTotalMedals;
+      }, 0); // Initialize totalMedals to 0
+    }),
+    catchError((error) => {
+      console.error('Error occurred while fetching total medals:', error);
+      return of(0); // Return 0 in case of error
+    })
+  );
+}
 
-  getTotalMedals(olympics: any[]): number {
-    return olympics.reduce((total, country) => 
-      total + this.getCountryMedals(country), 0);
-  }
+getCountryMedalsv2(country: Observable<Country>): Observable<number> {
+  return country.pipe(
+    map((country) => country.participations.reduce((total, participation) => 
+        total + participation.medalsCount, 0)), 
 
-  getNumberOfEntries(country: any): number {
-    return country?.participations?.length || 0;
-  }
-  getNumberOfAthletes(country: any): number {
-    return country?.participations?.reduce((total: number, participation: any) => 
-      total + participation.athleteCount, 0) || 0;
-  }
+    catchError((error, caught) => {
+      console.error('Error occurred while fetching country medals:', error);
+      return caught;
+    })
+  );
+}
+
+getNumberOfEntriesv2(country: Observable<Country>): Observable<number>{
+  return country.pipe(
+    map((country) => country.participations.length),
+    catchError((error, caught) => {
+      console.error('Error occurred while fetching number of entries:', error);
+      return caught;
+    })
+  );
+}
+
+
+getNumberOfAthletesv2(country: Observable<Country>): Observable<number>{
+  return country.pipe(
+    map((country) => country.participations.reduce((total, participation) => 
+      total + participation.athleteCount, 0)),
+    
+    catchError((error, caught) => {
+        console.error('Error occurred while fetching country data:', error);
+        return caught;
+      })
+  );
+}
+
 
   getChartDimensions(width: number): [number, number] {
     if (width < 768) {

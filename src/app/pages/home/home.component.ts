@@ -1,18 +1,28 @@
 import { Component, OnInit,HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of,forkJoin } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { Country } from '../../core/models/Country';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<any> = of(null);
+  // Variables Country
+  olympicsdata: Observable<Country[]> = of([]);
   public chartData: any[] = [];
-  private countryIdMap: { [key: string]: string } = {}; 
-  
+  private countryIdMap: { [key: string]: number } = {};
+
+  // Variables to hold the number of countries and JOs
+  numberOfCountries: Observable<number> | null = null;
+  numberOfJOs: Observable<number> | null = null;
+  totalMedals: Observable<number> | null = null;
+
   // Options du graphique
   view: [number, number] = [700, 400];
   gradient: boolean = false;
@@ -39,25 +49,42 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
       this.updateChartDimensions(window.innerWidth);
-      this.olympics$ = this.olympicService.getOlympics();
-      this.olympics$.subscribe(data => {
-        if (data) {
-          this.chartData = data.map((country: any) => {
-            this.countryIdMap[country.country] = country.id; // Populate the mapping
-            return {
-              name: country.country,
-              value: this.olympicService.getTotalMedals([country]),
-              displayValue: `${this.olympicService.getTotalMedals([country])} medals`,
-              
-              // id: country.id, // ID is not used directly in the chart
-              
-              country: country
+      this.olympicsdata = this.olympicService.getOlympics();
 
-            };
+      this.olympicService.getNumberOfCountriesv2(this.olympicsdata).subscribe(count => {
+      this.numberOfCountries = of(count); // Store the number of countries as Observable
+      });
+
+      this.olympicService.getNumberOfJOsv2(this.olympicsdata).subscribe(maxId => {
+      this.numberOfJOs = of(maxId); // Store the maximum ID of participations
+      });
+
+      this.olympicService.getTotalMedalsv2(this.olympicsdata).subscribe(totalMedals => {
+        this.totalMedals = of(totalMedals); // Store the total number of medals as Observable
+      });
+
+      this.olympicsdata.subscribe(data => {
+        if (data) {
+          const countryObservables = data.map((country: Country) => {
+            this.countryIdMap[country.country] = country.id; // Store ID as a number
+ 
+            // Use getCountryMedalsv2 to get the medals for each country
+            return this.olympicService.getCountryMedalsv2(of(country)).pipe(
+              map(medals => ({
+                name: country.country,
+                value: medals // Use the medals count from the observable
+              }))
+            );
           });
-          console.log('Chart Data:', this.chartData);
+  
+          // Use forkJoin to wait for all observables to complete
+          forkJoin(countryObservables).subscribe(results => {
+            this.chartData = results as any[]; // Type assertion to fix type error
+           // console.log('Chart Data:', this.chartData); // Log the chart data
+          });
         }
       });
+    
     }
 
     onSelect(event: any): void {
