@@ -1,5 +1,8 @@
 @import 'src/app/app.component.scss';
-/* Style for the "Medals per Country" title box */
+
+//------------------------------------------------------------------------------------------------
+// Style for the "Medals per Country" title box
+//------------------------------------------------------------------------------------------------
 .section-title .title-box {
     background: #388798; /* Green background */
     border: 2px solid #388798;
@@ -10,6 +13,9 @@
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 
+    //------------------------------------------------------------------------------------------------
+    // Style for the title text within the title box
+    //------------------------------------------------------------------------------------------------
     .title-text {
         color: white; /* White text */
         font-family: 'Montserrat', sans-serif;
@@ -17,7 +23,10 @@
         font-weight: bold;
     }
 }
-/* Style for the stats container boxes */
+//------------------------------------------------------------------------------------------------
+// Style for the stats container boxes ( Number of JOs, Number of Countries)
+//------------------------------------------------------------------------------------------------
+
 .stats-container {
     display: flex;
     justify-content: center;
@@ -51,6 +60,10 @@
     }
 }
 
+//------------------------------------------------------------------------------------------------
+// Style for the total medals container
+//------------------------------------------------------------------------------------------------
+
 .total-medals-container {
     display: flex;
     justify-content: center;
@@ -82,7 +95,11 @@
     }
 }
 
-/* Additional styling for the count to ensure it's centered */
+//------------------------------------------------------------------------------------------------
+// Additional styling for the count to ensures that the count is centered
+// and has appropriate size and margin.
+//------------------------------------------------------------------------------------------------
+
 .count {
     font-size: 28px;
     font-weight: bold;
@@ -90,10 +107,20 @@
     text-align: center;
 }
 
+//------------------------------------------------------------------------------------------------
+// Additional styling for the title text
+// to centers the title text and adds margin below it for spacing.
+//------------------------------------------------------------------------------------------------
+
 .title-text {
     text-align: center;
     margin-bottom: 5px;
 }
+
+//------------------------------------------------------------------------------------------------
+// Additional styling for the main title of the section, setting font, size, weight, and margin.
+//------------------------------------------------------------------------------------------------
+
 .title {
     text-align: center;
     font-family: 'Montserrat', sans-serif;

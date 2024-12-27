@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { ViewportScroller } from '@angular/common';
-//import { Chart, ChartConfiguration, TooltipItem } from 'chart.js/auto';
 
 @Component({
   selector: 'app-not-found',

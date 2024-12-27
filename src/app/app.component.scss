@@ -1,4 +1,6 @@
-/* Back Button settings*/
+//------------------------------------------------------------------------------------------------
+// Back Button settings
+//------------------------------------------------------------------------------------------------
 
   .back-button {
     position: absolute; // Keep it absolute to position it in the top left
@@ -35,7 +37,10 @@
     position: relative; // Ensure it can contain absolutely positioned children
 }
 
-   /*  Chart background settings*/
+//------------------------------------------------------------------------------------------------
+// Chart background settings
+//------------------------------------------------------------------------------------------------
+
   .chart-container {
     width: px;  // Set width as needed
     height: 400px; // Set height as needed
@@ -48,7 +53,10 @@
     align-items: center; // Center content vertically
 }
 
-  /*  Trait de séparation*/
+//------------------------------------------------------------------------------------------------
+// Home divider settings
+//------------------------------------------------------------------------------------------------
+
   .divider {
     border: none;
     height: 2px;
@@ -58,7 +66,9 @@
     z-index: 1; // Ensure it's on top of other elements
 }
 
-  /*  Responsive settings*/
+  //------------------------------------------------------------------------------------------------
+  // Responsive settings
+  //------------------------------------------------------------------------------------------------
   @media (max-width: 768px) {
           .section-title .title-box {
             width: 300px;
