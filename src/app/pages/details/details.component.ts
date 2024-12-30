@@ -70,9 +70,9 @@ export class DetailsComponent implements OnInit {
     
     this.updateChartDimensions(window.innerWidth);            // Update chart dimensions based on window width
     const idString = this.route.snapshot.paramMap.get('id');  // Get country ID from route
-    const id = idString ? Number(idString) : null;            // Convert string to number
+    const id = idString ? Number(idString) : undefined;       // Convert string to number
     
-    if (id !== null) { // Check if id is not null to display
+    if (id !== undefined && id <= 6) { // Check if id is valid and in range
       
       this.countrydata = this.olympicService.getCountrybyidv2(id);
       this.participantdata = this.olympicService.getNumberOfAthletesv2(this.countrydata);
@@ -85,7 +85,7 @@ export class DetailsComponent implements OnInit {
       this.subscriptions.add(
       this.countrydata.subscribe({
         next: (country) => {
-          console.log('Country Data:', country); // Log the entire country data
+          //console.log('Country Data:', country); // Log the entire country data
           if (country) {
             this.countryname = country;  // Store the country data
             this.updateChartData();}      // Update chart data based on country participations

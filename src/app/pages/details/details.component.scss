@@ -43,10 +43,16 @@
         
         .stat-value {
           color: #000;
-          font-size: 20px;  // Reduced font size
+          font-size: 25px;  // Reduced font size
           font-weight: bold;
         }
 
   }
-  
-      
+
+//------------------------------------------------------------------------------------------------
+// Size for the axis labels
+//------------------------------------------------------------------------------------------------
+::ng-deep .ngx-charts .axis text {
+  font-size: 100% !important;
+  font-weight: bold;
+}

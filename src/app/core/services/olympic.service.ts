@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of,Subscription } from 'rxjs';
 import { catchError, tap,map } from 'rxjs/operators';
 import { Country } from '../models/Country';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -55,8 +56,8 @@ export class OlympicService {
   getCountrybyidv2(id?: number): Observable<Country> {
     return this.olympics$.asObservable().pipe(
       map((olympics) => {
-        console.log("ID being searched for:", id);          // Log the ID being searched
-        console.log("Full AGAIN Olympics data:", olympics); // Log the current olympics data
+        //console.log("ID being searched for:", id);          // Log the ID being searched
+       // console.log("Full AGAIN Olympics data:", olympics); // Log the current olympics data
         const country = olympics.find((country: Country) => country.id === id);
         if (!country) {
           throw new Error(`Country with ID ${id} not found`);

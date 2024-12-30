@@ -2,16 +2,16 @@
 // Back Button settings
 //------------------------------------------------------------------------------------------------
 
-  .back-button {
-    position: absolute; // Keep it absolute to position it in the top left
-    left: 5px;        // Adjust as needed
-    top: 20px;         // Add some space from the top
+   .back-button {
+    margin-top: 20px;             // Add margin to create space above the button
+    display: flex;                // Use flexbox for alignment
+    justify-content: flex-start;  // Align items to the start (left)
   
     button {
       background-color: #008B8B;
       color: white;
       border: none;
-      padding: 5px 10px;
+      padding: 5px 15px;
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
@@ -51,6 +51,7 @@
     display: flex; // Optional: Flexbox for centering content
     justify-content: center; // Center content horizontally
     align-items: center; // Center content vertically
+
 }
 
 //------------------------------------------------------------------------------------------------
@@ -116,4 +117,5 @@
           .count {
             font-size: 24px;
           }
+          
 }

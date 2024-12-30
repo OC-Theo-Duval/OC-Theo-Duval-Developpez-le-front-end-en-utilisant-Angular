@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
       '#C4D7E6', // Spain
   ]};
 
+
   //------------------------------------------------------------------------------------------------
   // The constructor initializes the component with necessary services and route parameters:
   // - olympicService: Service to fetch Olympic-related data.
@@ -143,5 +144,6 @@ export class HomeComponent implements OnInit {
     updateChartDimensions(width: number) {
        this.view = this.olympicService.getChartDimensions(width); // Get chart dimensions from the service
      }
+     
   }
   

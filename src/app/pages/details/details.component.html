@@ -1,9 +1,5 @@
 <div class="center">
   
-<div class="back-button">
-      <button (click)="goBack()">Go Back</button>
-</div>
-
   <div class="country-name">{{ countryname?.country  }}</div>
 
       <div class="stats-container">
@@ -37,6 +33,10 @@
           [xAxisLabel]="xAxisLabel"
           [yAxisLabel]="yAxisLabel">
         </ngx-charts-line-chart>
+      </div>
+
+      <div class="back-button">
+        <button (click)="goBack()">← Back</button>
       </div>
   </div>
 
