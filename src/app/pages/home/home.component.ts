@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Olympic } from 'src/app/core/models/Olympic';
-import * as am5 from "@amcharts/amcharts5";
-import * as am5percent from "@amcharts/amcharts5/percent";
+import { ChartModule } from 'primeng/chart';
+import {PieController} from "chart.js";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,14 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 export class HomeComponent implements OnInit {
   public olympics$: Observable<Olympic[]> = of();
 
-  constructor(private olympicService: OlympicService) {}
+  public data: any;
+
+  public chartOptions: any;
+
+  constructor(private olympicService: OlympicService, private router: Router) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-
-    // Create root and chart
-    let root = am5.Root.new("chartdiv");
-    let chart = root.container.children.push(
-      am5percent.PieChart.new(root, {
-      })
-    );
 
     this.olympics$.subscribe(data => {
       if (data != null) {
@@ -35,23 +33,32 @@ export class HomeComponent implements OnInit {
           }
         });
 
-        let series = chart.series.push(
-          am5percent.PieSeries.new(root, {
-            name: "Medals count",
-            valueField: "medalsCount",
-            categoryField: "country"
-          })
-        );
-        series.data.setAll(pieOlympicArray);
+        let labels = new Array<String>();
+        let medalsCount = new Array<Number>();
 
-// Add legend
-        let legend = chart.children.push(am5.Legend.new(root, {
-          centerX: am5.percent(50),
-          x: am5.percent(50),
-          layout: root.horizontalLayout
-        }));
+        for (const poa of pieOlympicArray) {
+          labels.push(poa.country);
+          medalsCount.push(poa.medalsCount);
+        }
 
-        legend.data.setAll(series.dataItems);
+      this.data = {
+          labels: labels,
+          datasets: [
+            {
+              data: medalsCount
+            }
+          ]
+        };
+
+      this.chartOptions = {
+          plugins: {
+            legend: {
+              labels: {
+                color: '#495057'
+              }
+            }
+          }
+        }
       }
     });
   }
@@ -64,5 +71,11 @@ export class HomeComponent implements OnInit {
     }
 
     return count;
+  }
+
+  handleClick(event: any) {
+    console.log(event);
+    const id = event.element.index;
+    this.router.navigateByUrl(`/details/${id}`);
   }
 }
